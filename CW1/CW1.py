@@ -15,18 +15,31 @@ results_arr = np.asarray(results)
 # Transpose into matrix with dimension 520*2576
 faces_arr = faces_arr.transpose()
 
-
 # Get resolutions of the images
 image_pixels = faces_arr.shape[-1]
 
+# Compute number of images per person (assuming each face has same num of images)
+images_per_face = 0
+image_count = 0
+while images_per_face == 0:
+    if results[image_count] == results[image_count + 1]:
+        image_count += 1
+    else:
+        images_per_face = image_count + 1
+
+# Compute number of distinct faces in the data
+num_of_distinct_faces = int(faces_arr.shape[0] / images_per_face)
+
 # Define train/test set ratio
-train_ratio = 0.9
-test_ratio = 0.1
+test_image_per_face = 2
+train_image_per_face = images_per_face - test_image_per_face
 
-num_of_faces = faces_arr.shape[0]
+num_of_total_faces = faces_arr.shape[0]
 
-num_of_train_faces = int(round(num_of_faces * train_ratio))
-num_of_test_faces = int(round(num_of_faces * test_ratio))
+num_of_train_faces = train_image_per_face * num_of_distinct_faces
+num_of_test_faces = test_image_per_face * num_of_distinct_faces
+
+test_ratio = num_of_test_faces / num_of_total_faces
 
 faces_train = np.zeros((num_of_train_faces, image_pixels))
 faces_test = np.zeros((num_of_test_faces, image_pixels))
@@ -34,18 +47,22 @@ results_train = np.zeros(num_of_train_faces)
 results_test = np.zeros(num_of_test_faces)
 
 # Split training samples and test samples
-for i in range(0, int(round(num_of_faces / 10))):
-    start = i * 10
-    end = start + 10
+for i in range(0, num_of_distinct_faces):
+    start = i * images_per_face
+    end = start + images_per_face
     single_face_arr = faces_arr[start: end]
     single_face_result = results_arr[start: end]
     faces_train_temp, faces_test_temp, results_train_temp, results_test_temp = train_test_split(single_face_arr, single_face_result, test_size=test_ratio, random_state=10)
-    start_train = start if start == 0 else start - i
-    end_train = end - i - 1
+    start_train = start if start == 0 else start - test_image_per_face * i
+    end_train = end - test_image_per_face * (i + 1)
+    start_test = start if start == 0 else start - train_image_per_face * i
+    end_test = end - train_image_per_face * (i + 1)
     faces_train[start_train: end_train] = faces_train_temp
-    faces_test[i] = faces_test_temp
+    faces_test[start_test: end_test] = faces_test_temp
     results_train[start_train: end_train] = results_train_temp
-    results_test[i] = results_test_temp
+    results_test[start_test: end_test] = results_test_temp
+
+
 
 # Initialize sum of training faces
 face_train_sum = np.zeros((1, image_pixels))
