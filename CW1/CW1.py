@@ -30,8 +30,8 @@ while images_per_face == 0:
 # Compute number of distinct faces in the data
 num_of_distinct_faces = int(faces_arr.shape[0] / images_per_face)
 
-# Define train/test set ratio
-test_image_per_face = 2
+# Define train/test images per face
+test_image_per_face = 1
 train_image_per_face = images_per_face - test_image_per_face
 
 num_of_total_faces = faces_arr.shape[0]
@@ -101,7 +101,7 @@ for i in range(0, M):
 # Compute projections of training faces onto eigen space
 projections_of_train_faces = np.matmul(normalized_faces_train, best_eigen_vectors.transpose())
 
-train_faces_reconstructed = np.zeros((num_of_train_faces, image_pixels))
+train_faces_reconstructed = np.zeros((num_of_train_faces, image_pixels), dtype=np.complex)
 
 # Reconstruct training faces as linear combination of the best M eigen vectors
 for i in range(0, projections_of_train_faces.shape[-1]):
@@ -111,3 +111,29 @@ for i in range(0, projections_of_train_faces.shape[-1]):
         eigen_vector = best_eigen_vectors[j]
         linear_combination_of_eigen_vectors += [eig * projection for eig in eigen_vector]
     train_faces_reconstructed[i] = face_train_avg + linear_combination_of_eigen_vectors
+
+# Normalized test samples by subtracting average training face vector
+normalized_faces_test = faces_test - face_train_avg
+
+# Compute projections of testing faces onto eigen space
+projections_of_test_faces = np.matmul(normalized_faces_test, best_eigen_vectors.transpose())
+
+print(projections_of_train_faces.shape, projections_of_test_faces.shape)
+
+
+# Initialize learning_results
+learning_result = np.zeros(num_of_test_faces)
+
+i = 0
+
+# Compute learning result by using Nearest Neighbour classification
+for test_projection in projections_of_test_faces:
+    error = np.zeros((projections_of_train_faces.shape[0]))
+    index = 0
+    for train_projection in projections_of_train_faces:
+        error[index] = np.linalg.norm(test_projection - train_projection)
+        index += 1
+    learning_result[i] = results_train[np.argmin(error)]
+    i += 1
+
+print(learning_result)
