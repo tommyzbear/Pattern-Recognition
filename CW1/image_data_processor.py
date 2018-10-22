@@ -30,6 +30,8 @@ def split_train_test(total_faces_num,
                      resolutions,
                      faces,
                      results):
+
+    # Calculating the number of images, setting up for the training and test sample split
     train_image_per_face = images_per_face - test_image_per_face
 
     num_of_train_faces = train_image_per_face * num_of_distinct_faces

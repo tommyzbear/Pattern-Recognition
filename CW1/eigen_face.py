@@ -1,6 +1,6 @@
 import numpy as np
 
-
+# This class is for obtaining eigenface, this includes calculating avg face vector, normalizing face vector, obtaining covariance matrix, eigenvectors and eigenvalues, projecting training faces onto eigen space
 class EigenFace:
     def __init__(self, samples, resolutions, num_of_faces):
         self.face_avg_vector = avg_face_vector(samples, resolutions, num_of_faces)
