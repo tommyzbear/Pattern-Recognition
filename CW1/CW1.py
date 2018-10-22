@@ -22,6 +22,7 @@ def compute_accuracy(test_result, actual_result):
             correct += 1
     return correct / len(test_result)
 
+
 # Compute learning result by using Nearest Neighbour classification
 learning_result = pattern_recognition.nearest_neighbour()
 
