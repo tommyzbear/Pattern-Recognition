@@ -1,6 +1,7 @@
 import numpy as np
 import image_data_processor as idp
 from eigen_face import *
+from PIL import Image
 
 
 class PRFactory:
@@ -21,15 +22,22 @@ class PRFactory:
             self.faces,
             self.result)
 
-    def nearest_neighbour(self):
+    def nearest_neighbour(self, low_dimension=False):
         # Initialize learning_results
         learning_result = np.zeros(self.num_of_test_samples)
 
         i = 0
 
-        train_eigen_faces = EigenFace(self.train_samples, self.resolutions, self.num_of_train_samples)
+        train_eigen_faces = EigenFace(self.train_samples, self.resolutions, self.num_of_train_samples, low_dimension)
 
         projections_of_train_faces = train_eigen_faces.projections_of_faces
+
+        # Rescale average training vector to gray scale matrix
+        avg_train_image = train_eigen_faces.face_avg_vector.reshape(46, 56)
+
+        # Show image
+        im = Image.fromarray(avg_train_image)
+        im.show()
 
         # Normalized test samples by subtracting average training face vector
         normalized_faces_test = self.test_samples - train_eigen_faces.face_avg_vector

@@ -27,3 +27,10 @@ learning_result = pattern_recognition.nearest_neighbour()
 print("Accuracy: ", "{:.2%}".format(compute_accuracy(learning_result, pattern_recognition.test_results)))
 
 print("----- %s seconds -----" % (time.time() - start_time))
+
+learning_result = pattern_recognition.nearest_neighbour(True)
+
+print("Accuracy (low-dimension): ", "{:.2%}".format(compute_accuracy(learning_result, pattern_recognition.test_results)))
+
+print("----- %s seconds -----" % (time.time() - start_time))
+

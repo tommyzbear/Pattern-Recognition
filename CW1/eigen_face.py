@@ -2,12 +2,15 @@ import numpy as np
 
 
 class EigenFace:
-    def __init__(self, samples, resolutions, num_of_faces):
+    def __init__(self, samples, resolutions, num_of_faces, low_dimension):
         self.face_avg_vector = avg_face_vector(samples, resolutions, num_of_faces)
         self.normalized_face = samples - self.face_avg_vector
-        self.covariance = (1 / num_of_faces) * np.matmul(self.normalized_face.transpose(), self.normalized_face)
+        self.covariance = \
+            (1 / num_of_faces) * np.matmul(self.normalized_face.transpose(), self.normalized_face) \
+            if low_dimension is False \
+            else (1 / num_of_faces) * np.matmul(self.normalized_face, self.normalized_face.transpose())
         self.eigen_values, self.eigen_vectors = np.linalg.eig(self.covariance)
-        self.best_eigen_vectors = compute_best_eigen_vectors(self.eigen_values, self.eigen_vectors, resolutions)
+        self.best_eigen_vectors = compute_best_eigen_vectors(self.eigen_values, self.eigen_vectors, len(self.covariance))
         self.projections_of_faces = np.matmul(self.normalized_face, self.best_eigen_vectors.transpose())
 
 
@@ -21,7 +24,7 @@ def avg_face_vector(samples, resolutions, num_of_faces):
     return faces_sum / num_of_faces
 
 
-def compute_best_eigen_vectors(eigen_values, eigen_vectors, resolutions):
+def compute_best_eigen_vectors(eigen_values, eigen_vectors, size):
     # finding how many eigenfaces needed to represent 95% total variance
     eig_value_sum = sum(eigen_values)
     sum_temp = 0
@@ -38,7 +41,7 @@ def compute_best_eigen_vectors(eigen_values, eigen_vectors, resolutions):
     largest_eigen_value_indices = np.argsort(eigen_values)[-M:]
 
     # Initialize best eigen vectors
-    best_eigen_vectors = np.zeros((M, resolutions), dtype=np.complex)
+    best_eigen_vectors = np.zeros((M, size), dtype=np.complex)
 
     # Retrieve corresponding eigen vectors mapping to top M eigen values
     for i in range(0, M):
