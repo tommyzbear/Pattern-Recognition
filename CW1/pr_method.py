@@ -3,7 +3,7 @@ import image_data_processor as idp
 from eigen_face import *
 from PIL import Image
 
-
+# This class is for initializing for classification and applying different classification methods
 class PRFactory:
     def __init__(self, faces, result, test_image_per_face):
         self.faces = np.asarray(faces).transpose()
@@ -22,12 +22,14 @@ class PRFactory:
             self.faces,
             self.result)
 
+    # Compute learning result by using Nearest Neighbour classification
     def nearest_neighbour(self, low_dimension=False):
         # Initialize learning_results
         learning_result = np.zeros(self.num_of_test_samples)
 
         i = 0
 
+        # Compute projections of training faces onto eigen space
         train_eigen_faces = EigenFace(self.train_samples, self.resolutions, self.num_of_train_samples, low_dimension)
 
         projections_of_train_faces = train_eigen_faces.projections_of_faces

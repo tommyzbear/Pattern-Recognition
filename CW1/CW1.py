@@ -11,9 +11,10 @@ data = loadmat('face(1).mat')
 faces = data.get("X")
 results = data.get("l")
 
+# Initialize for classification
 pattern_recognition = PRFactory(faces, results, 1)
 
-
+# Calculating classified accuracy
 def compute_accuracy(test_result, actual_result):
     correct = 0
     for i in range(0, len(test_result)):
@@ -21,7 +22,7 @@ def compute_accuracy(test_result, actual_result):
             correct += 1
     return correct / len(test_result)
 
-
+# Compute learning result by using Nearest Neighbour classification
 learning_result = pattern_recognition.nearest_neighbour()
 
 print("Accuracy: ", "{:.2%}".format(compute_accuracy(learning_result, pattern_recognition.test_results)))
