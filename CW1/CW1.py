@@ -137,3 +137,15 @@ for test_projection in projections_of_test_faces:
     i += 1
 
 print(learning_result)
+print(results_test)
+
+
+def compute_accuracy (test_result, actual_result):
+    correct = 0
+    for i in range(0, len(test_result)):
+        if test_result[i] == actual_result[i]:
+            correct += 1
+    return correct / len(test_result)
+
+
+print("Accuracy: ", "{:.2%}".format(compute_accuracy(learning_result, results_test)))
