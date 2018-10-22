@@ -1,6 +1,9 @@
 from mat4py import loadmat
 import numpy as np
 from sklearn.model_selection import train_test_split
+import time
+
+start_time = time.time()
 
 # Loading face information in .mat data file
 data = loadmat('face(1).mat')
@@ -149,3 +152,5 @@ def compute_accuracy (test_result, actual_result):
 
 
 print("Accuracy: ", "{:.2%}".format(compute_accuracy(learning_result, results_test)))
+
+print("----- %s seconds -----" % (time.time() - start_time))
