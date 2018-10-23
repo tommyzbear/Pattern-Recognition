@@ -1,7 +1,7 @@
-import numpy as np
 import image_data_processor as idp
 from eigen_face import *
-from PIL import Image
+import matplotlib.pyplot as plt
+
 
 # This class is for initializing for classification and applying different classification methods
 class PRFactory:
@@ -38,14 +38,19 @@ class PRFactory:
         avg_train_image = train_eigen_faces.face_avg_vector.reshape(46, 56)
 
         # Show image
-        im = Image.fromarray(avg_train_image)
-        im.show()
+        avg_train_image = avg_train_image.T
+        plt.imshow(avg_train_image, cmap='gist_gray')
 
         # Normalized test samples by subtracting average training face vector
         normalized_faces_test = self.test_samples - train_eigen_faces.face_avg_vector
 
+        best_train_eigen_vectors = train_eigen_faces.best_eigen_vectors.transpose()
+        normalized_faces_train = train_eigen_faces.normalized_face.transpose()
+
         # Compute projections of testing faces onto eigen space
-        projections_of_test_faces = np.matmul(normalized_faces_test, train_eigen_faces.best_eigen_vectors.transpose())
+        projections_of_test_faces = np.matmul(normalized_faces_test, best_train_eigen_vectors) \
+            if low_dimension is False \
+            else np.matmul(normalized_faces_test, np.matmul(normalized_faces_train, best_train_eigen_vectors))
 
         # Compute learning result by using Nearest Neighbour classification
         for test_projection in projections_of_test_faces:

@@ -13,7 +13,9 @@ class EigenFace:
             else (1 / num_of_faces) * np.matmul(self.normalized_face, self.normalized_face.transpose())
         self.eigen_values, self.eigen_vectors = np.linalg.eig(self.covariance)
         self.best_eigen_vectors = compute_best_eigen_vectors(self.eigen_values, self.eigen_vectors, len(self.covariance))
-        self.projections_of_faces = np.matmul(self.normalized_face, self.best_eigen_vectors.transpose())
+        self.projections_of_faces = np.matmul(self.normalized_face, self.best_eigen_vectors.transpose()) \
+            if low_dimension is False \
+            else np.matmul(self.normalized_face, np.matmul(self.normalized_face.transpose(), self.best_eigen_vectors.transpose()))
 
 
 # Initialize sum of training faces

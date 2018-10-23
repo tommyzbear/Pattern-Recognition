@@ -14,6 +14,7 @@ results = data.get("l")
 # Initialize for classification
 pattern_recognition = PRFactory(faces, results, 1)
 
+
 # Calculating classified accuracy
 def compute_accuracy(test_result, actual_result):
     correct = 0
@@ -26,13 +27,19 @@ def compute_accuracy(test_result, actual_result):
 # Compute learning result by using Nearest Neighbour classification
 learning_result = pattern_recognition.nearest_neighbour()
 
+end_time = time.time()
+
 print("Accuracy: ", "{:.2%}".format(compute_accuracy(learning_result, pattern_recognition.test_results)))
 
-print("----- %s seconds -----" % (time.time() - start_time))
+print("----- %s seconds -----" % (end_time - start_time))
+
+start_time = time.time()
 
 learning_result = pattern_recognition.nearest_neighbour(True)
 
+end_time = time.time()
+
 print("Accuracy (low-dimension): ", "{:.2%}".format(compute_accuracy(learning_result, pattern_recognition.test_results)))
 
-print("----- %s seconds -----" % (time.time() - start_time))
+print("----- %s seconds -----" % (end_time - start_time))
 
