@@ -1,4 +1,5 @@
 import numpy as np
+import image_data_processor as idp
 
 
 # This class is for obtaining eigenface, this includes calculating avg face vector, normalizing face vector, obtaining
@@ -13,9 +14,13 @@ class EigenFace:
             else (1 / num_of_faces) * np.matmul(self.normalized_face, self.normalized_face.transpose())
         self.eigen_values, self.eigen_vectors = np.linalg.eig(self.covariance)
         self.best_eigen_vectors = compute_best_eigen_vectors(self.eigen_values, self.eigen_vectors, len(self.covariance))
-        self.projections_of_faces = np.matmul(self.normalized_face, self.best_eigen_vectors.transpose()) \
-            if low_dimension is False \
-            else np.matmul(self.normalized_face, np.matmul(self.normalized_face.transpose(), self.best_eigen_vectors.transpose()))
+        if low_dimension is False:
+            self.projections_of_faces = np.matmul(self.normalized_face, self.best_eigen_vectors.transpose())
+        else:
+            eigen_vector = np.matmul(self.best_eigen_vectors, self.normalized_face)
+            for v in eigen_vector:
+                idp.normalization(v)
+            self.projections_of_faces = np.matmul(self.normalized_face, eigen_vector.transpose())
 
 
 # Initialize sum of training faces

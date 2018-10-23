@@ -64,3 +64,9 @@ def split_train_test(total_faces_num,
         results_test[start_test: end_test] = results_test_temp
 
     return num_of_train_faces, num_of_test_faces, faces_train, faces_test, results_train, results_test
+
+
+def normalization(vector):
+    norm = np.linalg.norm(vector)
+    vector /= norm
+

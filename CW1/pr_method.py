@@ -45,12 +45,19 @@ class PRFactory:
         normalized_faces_test = self.test_samples - train_eigen_faces.face_avg_vector
 
         best_train_eigen_vectors = train_eigen_faces.best_eigen_vectors.transpose()
-        normalized_faces_train = train_eigen_faces.normalized_face.transpose()
 
         # Compute projections of testing faces onto eigen space
-        projections_of_test_faces = np.matmul(normalized_faces_test, best_train_eigen_vectors) \
-            if low_dimension is False \
-            else np.matmul(normalized_faces_test, np.matmul(normalized_faces_train, best_train_eigen_vectors))
+        if low_dimension is False:
+            projections_of_test_faces = np.matmul(normalized_faces_test, best_train_eigen_vectors)
+        else:
+            normalized_faces_train = train_eigen_faces.normalized_face.transpose()
+            # Compute eigen vector that matches the dimension using relationship u = Av,
+            # where u is eigen vector of size D, v is eigen vector of size N<<D, A is normalized training faces
+            eigen_vector = np.matmul(normalized_faces_train, best_train_eigen_vectors).transpose()
+            for v in eigen_vector:
+                idp.normalization(v)
+            eigen_vector = eigen_vector.transpose()
+            projections_of_test_faces = np.matmul(normalized_faces_test, eigen_vector)
 
         # Compute learning result by using Nearest Neighbour classification
         for test_projection in projections_of_test_faces:
