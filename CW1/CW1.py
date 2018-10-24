@@ -35,7 +35,7 @@ print("----- %s seconds -----" % (end_time - start_time))
 
 start_time = time.time()
 
-learning_result = pattern_recognition.low_dim_pca()
+learning_result, reconstructed_face = pattern_recognition.low_dim_pca()
 
 end_time = time.time()
 

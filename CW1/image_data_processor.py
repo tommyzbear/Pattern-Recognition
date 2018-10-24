@@ -40,8 +40,8 @@ def split_train_test(total_faces_num,
 
     test_ratio = num_of_test_faces / total_faces_num
 
-    faces_train = np.zeros((num_of_train_faces, resolutions))
-    faces_test = np.zeros((num_of_test_faces, resolutions))
+    faces_train = np.zeros((resolutions, num_of_train_faces))
+    faces_test = np.zeros((resolutions, num_of_test_faces))
     results_train = np.zeros(num_of_train_faces)
     results_test = np.zeros(num_of_test_faces)
 
@@ -49,9 +49,9 @@ def split_train_test(total_faces_num,
     for i in range(0, num_of_distinct_faces):
         start = i * images_per_face
         end = start + images_per_face
-        single_face_arr = faces[start: end]
+        single_face_arr = faces[:, start: end]
         single_face_result = results[start: end]
-        faces_train_temp, faces_test_temp, results_train_temp, results_test_temp = train_test_split(single_face_arr,
+        faces_train_temp, faces_test_temp, results_train_temp, results_test_temp = train_test_split(single_face_arr.transpose(),
                                                                                                     single_face_result,
                                                                                                     test_size=test_ratio,
                                                                                                     random_state=10)
@@ -59,8 +59,8 @@ def split_train_test(total_faces_num,
         end_train = end - test_image_per_face * (i + 1)
         start_test = start if start == 0 else start - train_image_per_face * i
         end_test = end - train_image_per_face * (i + 1)
-        faces_train[start_train: end_train] = faces_train_temp
-        faces_test[start_test: end_test] = faces_test_temp
+        faces_train[:, start_train: end_train] = faces_train_temp.transpose()
+        faces_test[:, start_test: end_test] = faces_test_temp.transpose()
         results_train[start_train: end_train] = results_train_temp
         results_test[start_test: end_test] = results_test_temp
 
@@ -83,15 +83,15 @@ def print_image(image):
 
 
 def face_reconstruction(num_of_faces, projections, resolutions, best_eigen_vectors, face_avg, M):
-    train_faces_reconstructed = np.zeros((num_of_faces, resolutions), dtype=np.complex)
+    train_faces_reconstructed = np.zeros((resolutions, num_of_faces), dtype=np.complex)
 
     # Reconstruct training faces as linear combination of the best M eigen vectors
     for i in range(0, projections.shape[0]):
-        linear_combination_of_eigen_vectors = np.zeros((1, resolutions), dtype=np.complex)
+        linear_combination_of_eigen_vectors = np.zeros((resolutions, 1), dtype=np.complex)
         for j in range(0, M):
             projection = projections[i][j]
-            eigen_vector = best_eigen_vectors[j]
-            linear_combination_of_eigen_vectors += [eig * projection for eig in eigen_vector]
-        train_faces_reconstructed[i] = face_avg + linear_combination_of_eigen_vectors
+            eigen_vector = best_eigen_vectors[j].reshape(resolutions, 1)
+            linear_combination_of_eigen_vectors += eigen_vector * projection
+        train_faces_reconstructed[:, i] = (face_avg + linear_combination_of_eigen_vectors).squeeze()
 
     return train_faces_reconstructed

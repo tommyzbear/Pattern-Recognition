@@ -6,32 +6,31 @@ import image_data_processor as idp
 # covariance matrix, eigenvectors and eigenvalues, projecting training faces onto eigen space
 class EigenFace:
     def __init__(self, samples, resolutions, num_of_faces, low_dimension=False):
-        self.face_avg_vector = avg_face_vector(samples, resolutions, num_of_faces)
+        self.face_avg_vector = avg_face_vector(samples, resolutions, num_of_faces).reshape(resolutions, 1)
         self.normalized_face = samples - self.face_avg_vector
         self.covariance = \
-            (1 / num_of_faces) * np.matmul(self.normalized_face.transpose(), self.normalized_face) \
+            (1 / num_of_faces) * np.matmul(self.normalized_face, self.normalized_face.transpose()) \
             if low_dimension is False \
-            else (1 / num_of_faces) * np.matmul(self.normalized_face, self.normalized_face.transpose())
+            else (1 / num_of_faces) * np.matmul(self.normalized_face.transpose(), self.normalized_face)
         self.eigen_values, self.eigen_vectors = np.linalg.eig(self.covariance)
         self.best_eigen_vectors, self.M = compute_best_eigen_vectors(self.eigen_values, self.eigen_vectors, len(self.covariance))
         if low_dimension is False:
-            eigen_vector = self.best_eigen_vectors
-            for v in eigen_vector:
-                idp.normalization(v)
-            self.projections_of_faces = np.matmul(self.normalized_face, self.best_eigen_vectors.transpose())
+            self.projections_of_faces = np.matmul(self.normalized_face.transpose(), self.best_eigen_vectors)
         else:
-            eigen_vector = np.matmul(self.best_eigen_vectors, self.normalized_face)
+            eigen_vector = np.matmul(self.normalized_face, self.best_eigen_vectors).transpose()
             for v in eigen_vector:
                 idp.normalization(v)
-            self.projections_of_faces = np.matmul(self.normalized_face, eigen_vector.transpose())
+            eigen_vector = eigen_vector.transpose()
+            self.projections_of_faces = np.matmul(self.normalized_face.transpose(), eigen_vector)
 
 
 # Initialize sum of training faces
 def avg_face_vector(samples, resolutions, num_of_faces):
-    faces_sum = np.zeros((1, resolutions))
+    faces_sum = np.zeros(resolutions)
 
     for i in range(num_of_faces):
-        faces_sum += samples[i]
+        temp = samples[:, i]
+        faces_sum += temp
 
     return faces_sum / num_of_faces
 
@@ -45,7 +44,7 @@ def compute_best_eigen_vectors(eigen_values, eigen_vectors, size):
     for i in range(0, len(eigen_values)):
         sum_temp = sum_temp + eigen_values[i]
         tv = sum_temp / eig_value_sum
-        if tv > 0.95 and first_found == 0:
+        if tv > 0.99 and first_found == 0:
             M = i + 1
             first_found = 1
 
@@ -53,10 +52,10 @@ def compute_best_eigen_vectors(eigen_values, eigen_vectors, size):
     largest_eigen_value_indices = np.argsort(eigen_values)[-M:]
 
     # Initialize best eigen vectors
-    best_eigen_vectors = np.zeros((M, size), dtype=np.complex)
+    best_eigen_vectors = np.zeros((size, M), dtype=np.complex)
 
     # Retrieve corresponding eigen vectors mapping to top M eigen values
     for i in range(0, M):
-        best_eigen_vectors[i] = eigen_vectors[largest_eigen_value_indices[i]]
+        best_eigen_vectors[:, i] = eigen_vectors[:, largest_eigen_value_indices[i]]
 
     return best_eigen_vectors, M

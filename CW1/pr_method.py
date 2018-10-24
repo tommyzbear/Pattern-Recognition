@@ -5,11 +5,11 @@ from image_data_processor import *
 # This class is for initializing for classification and applying different classification methods
 class PRFactory:
     def __init__(self, faces, result, test_image_per_face):
-        self.faces = np.asarray(faces).transpose()
+        self.faces = np.asarray(faces)
         self.result = np.asarray(result)
         self.test_image_per_face = test_image_per_face
-        self.resolutions = self.faces.shape[-1]
-        self.total_faces_num = self.faces.shape[0]
+        self.resolutions = self.faces.shape[0]
+        self.total_faces_num = self.faces.shape[-1]
         self.images_per_face = idp.images_per_person(self.result)
         self.num_of_distinct_face = idp.distinct_faces_num(self.total_faces_num, self.images_per_face)
         self.num_of_train_samples, self.num_of_test_samples, self.train_samples, self.test_samples, self.train_results, self.test_results = idp.split_train_test(
@@ -22,14 +22,14 @@ class PRFactory:
             self.result)
 
     # Compute learning result by using Nearest Neighbour classification
-    def pca(self, low_dimension=False):
+    def pca(self):
         # Initialize learning_results
         learning_result = np.zeros(self.num_of_test_samples)
 
         i = 0
 
         # Compute projections of training faces onto eigen space
-        train_eigen_faces = EigenFace(self.train_samples, self.resolutions, self.num_of_train_samples, low_dimension)
+        train_eigen_faces = EigenFace(self.train_samples, self.resolutions, self.num_of_train_samples)
 
         projections_of_train_faces = train_eigen_faces.projections_of_faces
 
@@ -39,20 +39,10 @@ class PRFactory:
         # Normalized test samples by subtracting average training face vector
         normalized_faces_test = self.test_samples - train_eigen_faces.face_avg_vector
 
-        best_train_eigen_vectors = train_eigen_faces.best_eigen_vectors.transpose()
+        best_train_eigen_vectors = train_eigen_faces.best_eigen_vectors
 
         # Compute projections of testing faces onto eigen space
-        if low_dimension is False:
-            projections_of_test_faces = np.matmul(normalized_faces_test, best_train_eigen_vectors)
-        else:
-            normalized_faces_train = train_eigen_faces.normalized_face.transpose()
-            # Compute eigen vector that matches the dimension using relationship u = Av,
-            # where u is eigen vector of size D, v is eigen vector of size N<<D, A is normalized training faces
-            eigen_vector = np.matmul(normalized_faces_train, best_train_eigen_vectors).transpose()
-            for v in eigen_vector:
-                idp.normalization(v)
-            eigen_vector = eigen_vector.transpose()
-            projections_of_test_faces = np.matmul(normalized_faces_test, eigen_vector)
+        projections_of_test_faces = np.matmul(normalized_faces_test.transpose(), best_train_eigen_vectors)
 
         # Compute learning result by using Nearest Neighbour classification
         for test_projection in projections_of_test_faces:
@@ -91,18 +81,15 @@ class PRFactory:
         # Normalized test samples by subtracting average training face vector
         normalized_faces_test = self.test_samples - train_eigen_faces.face_avg_vector
 
-        best_train_eigen_vectors = train_eigen_faces.best_eigen_vectors.transpose()
-
-        # Compute projections of testing faces onto eigen space
-        normalized_faces_train = train_eigen_faces.normalized_face.transpose()
+        best_train_eigen_vectors = train_eigen_faces.best_eigen_vectors
 
         # Compute eigen vector that matches the dimension using relationship u = Av,
         # where u is eigen vector of size D, v is eigen vector of size N<<D, A is normalized training faces
-        eigen_vector = np.matmul(normalized_faces_train, best_train_eigen_vectors).transpose()
+        eigen_vector = np.matmul(train_eigen_faces.normalized_face, best_train_eigen_vectors).transpose()
         for v in eigen_vector:
             idp.normalization(v)
         eigen_vector = eigen_vector.transpose()
-        projections_of_test_faces = np.matmul(normalized_faces_test, eigen_vector)
+        projections_of_test_faces = np.matmul(normalized_faces_test.transpose(), eigen_vector)
 
         # Compute learning result by using Nearest Neighbour classification
         for test_projection in projections_of_test_faces:
@@ -114,4 +101,12 @@ class PRFactory:
             learning_result[i] = self.train_results[np.argmin(error)]
             i += 1
 
-        return learning_result
+        reconstructed_face = idp.face_reconstruction(
+            self.num_of_test_samples,
+            projections_of_test_faces,
+            self.resolutions,
+            eigen_vector.transpose(),
+            train_eigen_faces.face_avg_vector,
+            train_eigen_faces.M)
+
+        return learning_result, reconstructed_face
