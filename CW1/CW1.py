@@ -5,7 +5,7 @@ import time
 start_time = time.time()
 
 # Loading face information in .mat data file
-data = loadmat('face(1).mat')
+data = loadmat('face.mat')
 
 # Data stored in key 'X' in the library with size 2576*520 and results stored in key 'l' with size 520*1
 faces = data.get("X")
@@ -25,7 +25,7 @@ def compute_accuracy(test_result, actual_result):
 
 
 # Compute learning result by using Nearest Neighbour classification
-learning_result = pattern_recognition.nearest_neighbour()
+learning_result, reconstructed_face = pattern_recognition.pca()
 
 end_time = time.time()
 
@@ -35,7 +35,7 @@ print("----- %s seconds -----" % (end_time - start_time))
 
 start_time = time.time()
 
-learning_result = pattern_recognition.nearest_neighbour(True)
+learning_result = pattern_recognition.low_dim_pca()
 
 end_time = time.time()
 

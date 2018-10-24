@@ -6,7 +6,7 @@ import time
 start_time = time.time()
 
 # Loading face information in .mat data file
-data = loadmat('face(1).mat')
+data = loadmat('face.mat')
 
 # Data stored in key 'X' in the library with size 2576*520 and results stored in key 'l' with size 520*1
 faces = data.get("X")

@@ -1,5 +1,6 @@
 import numpy as np
 from sklearn.model_selection import train_test_split
+import matplotlib.pyplot as plt
 
 
 # Compute number of images per person (assuming each face has same num of images)
@@ -70,3 +71,27 @@ def normalization(vector):
     norm = np.linalg.norm(vector)
     vector /= norm
 
+
+def print_image(image):
+    # Rescale average training vector to gray scale matrix
+    image_to_print = image.reshape(46, 56)
+
+    # Show image
+    image_to_print = image_to_print.T
+    plt.imshow(image_to_print, cmap='gist_gray')
+    plt.show()
+
+
+def face_reconstruction(num_of_faces, projections, resolutions, best_eigen_vectors, face_avg, M):
+    train_faces_reconstructed = np.zeros((num_of_faces, resolutions), dtype=np.complex)
+
+    # Reconstruct training faces as linear combination of the best M eigen vectors
+    for i in range(0, projections.shape[0]):
+        linear_combination_of_eigen_vectors = np.zeros((1, resolutions), dtype=np.complex)
+        for j in range(0, M):
+            projection = projections[i][j]
+            eigen_vector = best_eigen_vectors[j]
+            linear_combination_of_eigen_vectors += [eig * projection for eig in eigen_vector]
+        train_faces_reconstructed[i] = face_avg + linear_combination_of_eigen_vectors
+
+    return train_faces_reconstructed
