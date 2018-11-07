@@ -97,3 +97,28 @@ def sample_reconstruction(num_of_faces, projections, resolutions, best_eigen_vec
         train_faces_reconstructed[:, i] = (face_avg + linear_combination_of_eigen_vectors).squeeze()
 
     return train_faces_reconstructed
+
+
+def image_comparison(pca):
+    first_reconstructed_image = pca.test_sample_reconstructed[:, 0].real.reshape(46, 56).T
+    second_reconstructed_image = pca.test_sample_reconstructed[:, 1].real.reshape(46, 56).T
+    third_reconstructed_image = pca.test_sample_reconstructed[:, 2].real.reshape(46, 56).T
+    first_test_image = pca.test_sample[:, 0].reshape(46, 56).T
+    second_test_image = pca.test_sample[:, 1].reshape(46, 56).T
+    third_test_image = pca.test_sample[:, 2].reshape(46, 56).T
+
+    plt.subplot(321)
+    plt.title('Actual')
+    plt.imshow(first_test_image, cmap='gist_gray')
+    plt.subplot(323)
+    plt.imshow(second_test_image, cmap='gist_gray')
+    plt.subplot(325)
+    plt.imshow(third_test_image, cmap='gist_gray')
+    plt.subplot(322)
+    plt.title('Reconstructed')
+    plt.imshow(first_reconstructed_image, cmap='gist_gray')
+    plt.subplot(324)
+    plt.imshow(second_reconstructed_image, cmap='gist_gray')
+    plt.subplot(326)
+    plt.imshow(third_reconstructed_image, cmap='gist_gray')
+    plt.show()

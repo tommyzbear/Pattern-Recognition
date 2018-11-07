@@ -32,7 +32,9 @@ class PCA:
         self.test_sample_projection = None
         self.train_sample_reconstructed = None
         self.test_sample_reconstructed = None
-        self.learning_result = None
+        self.cov_mem_usage = None
+        self.eig_vec_mem_usage = None
+        self.eig_val_mem_usage = None
         # Only used for low dimension case
         self.dimensioned_eig_vectors = None
 
@@ -55,9 +57,9 @@ class PCA:
         eig_values, eig_vectors = np.linalg.eig(cov)
 
         # Check memory usage for Covariance matrix and eigen values, eigen vectors
-        print("Covariance memory usage: ", sys.getsizeof(cov), " bytes")
-        print("Eigen vectors memory usage: ", sys.getsizeof(eig_vectors), " bytes")
-        print("Eigen values memory usage: ", sys.getsizeof(eig_values), " bytes")
+        self.cov_mem_usage = sys.getsizeof(cov)
+        self.eig_vec_mem_usage = sys.getsizeof(eig_vectors)
+        self.eig_val_mem_usage = sys.getsizeof(eig_values)
 
         # Retrieve largest M eigen value indices in the array
         largest_eig_value_indices = np.argsort(eig_values)[-self.M:]
@@ -101,29 +103,6 @@ class PCA:
                                                                        self.train_avg_vector,
                                                                        self.M)
 
-        first_reconstructed_image = self.test_sample_reconstructed[:, 0].real.reshape(46, 56).T
-        second_reconstructed_image = self.test_sample_reconstructed[:, 1].real.reshape(46, 56).T
-        third_reconstructed_image = self.test_sample_reconstructed[:, 2].real.reshape(46, 56).T
-        first_test_image = self.test_sample[:, 0].reshape(46, 56).T
-        second_test_image = self.test_sample[:, 1].reshape(46, 56).T
-        third_test_image = self.test_sample[:, 2].reshape(46, 56).T
-
-        plt.subplot(321)
-        plt.title('Actual')
-        plt.imshow(first_test_image, cmap='gist_gray')
-        plt.subplot(323)
-        plt.imshow(second_test_image, cmap='gist_gray')
-        plt.subplot(325)
-        plt.imshow(third_test_image, cmap='gist_gray')
-        plt.subplot(322)
-        plt.title('Reconstructed')
-        plt.imshow(first_reconstructed_image, cmap='gist_gray')
-        plt.subplot(324)
-        plt.imshow(second_reconstructed_image, cmap='gist_gray')
-        plt.subplot(326)
-        plt.imshow(third_reconstructed_image, cmap='gist_gray')
-        plt.show()
-
     def train_sample_reconstruction(self):
         self.train_sample_reconstructed = idp.sample_reconstruction(self.num_of_train_samples,
                                                                     self.test_sample_projection,
@@ -131,19 +110,6 @@ class PCA:
                                                                     self.best_eig_vectors,
                                                                     self.train_avg_vector,
                                                                     self.M)
-
-    def compute_result(self):
-        self.learning_result = np.zeros(self.num_of_test_samples)
-        i = 0
-        # Compute learning result by using Nearest Neighbour classification
-        for test_projection in self.test_sample_projection:
-            error = np.zeros((self.train_sample_projection.shape[0]))
-            index = 0
-            for train_projection in self.train_sample_projection:
-                error[index] = np.linalg.norm(test_projection - train_projection)
-                index += 1
-            self.learning_result[i] = self.train_results[np.argmin(error)]
-            i += 1
 
 
 def avg_face_vector(samples, resolution, num_of_samples):
