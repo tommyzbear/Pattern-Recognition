@@ -1,6 +1,7 @@
 import numpy as np
 from sklearn.model_selection import train_test_split
 import matplotlib.pyplot as plt
+import random
 
 
 # Compute number of images per person (assuming each face has same num of images)
@@ -47,6 +48,7 @@ def split_train_test(total_faces_num,
 
     # Split training samples and test samples
     for i in range(0, num_of_distinct_faces):
+        state = random.randint(1, 100)
         start = i * images_per_face
         end = start + images_per_face
         single_face_arr = faces[:, start: end]
@@ -54,7 +56,7 @@ def split_train_test(total_faces_num,
         faces_train_temp, faces_test_temp, results_train_temp, results_test_temp = train_test_split(single_face_arr.transpose(),
                                                                                                     single_face_result,
                                                                                                     test_size=test_ratio,
-                                                                                                    random_state=10)
+                                                                                                    random_state=state)
         start_train = start if start == 0 else start - test_image_per_face * i
         end_train = end - test_image_per_face * (i + 1)
         start_test = start if start == 0 else start - train_image_per_face * i
@@ -82,7 +84,7 @@ def print_image(image):
     plt.show()
 
 
-def face_reconstruction(num_of_faces, projections, resolutions, best_eigen_vectors, face_avg, M):
+def sample_reconstruction(num_of_faces, projections, resolutions, best_eigen_vectors, face_avg, M):
     train_faces_reconstructed = np.zeros((resolutions, num_of_faces), dtype=np.complex)
 
     # Reconstruct training faces as linear combination of the best M eigen vectors
