@@ -1,6 +1,7 @@
 import numpy as np
 import image_data_processor as idp
 import matplotlib.pyplot as plt
+import sys
 
 
 class PCA:
@@ -52,6 +53,11 @@ class PCA:
 
         # Compute eigen values and eigen vectors of the covariance matrix
         eig_values, eig_vectors = np.linalg.eig(cov)
+
+        # Check memory usage for Covariance matrix and eigen values, eigen vectors
+        print("Covariance memory usage: ", sys.getsizeof(cov), " bytes")
+        print("Eigen vectors memory usage: ", sys.getsizeof(eig_vectors), " bytes")
+        print("Eigen values memory usage: ", sys.getsizeof(eig_values), " bytes")
 
         # Retrieve largest M eigen value indices in the array
         largest_eig_value_indices = np.argsort(eig_values)[-self.M:]

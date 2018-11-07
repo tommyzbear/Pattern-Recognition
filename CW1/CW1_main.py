@@ -36,6 +36,7 @@ num_of_train_samples, num_of_test_samples, train_samples, test_samples, train_re
     num_of_faces, test_image_per_face, images_per_face, num_of_distinct_face, resolution, faces, results)
 
 # PCA method
+print("----- PCA -----")
 pca_method = PCA(test_samples,
                  train_samples,
                  train_results,
@@ -50,7 +51,7 @@ pca_method.projection()
 
 end_time = time.time()
 
-print("----- Compute Time: %s seconds -----" % (end_time - start_time))
+print("Compute Time: %s seconds" % (end_time - start_time))
 
 pca_method.compute_result()
 
@@ -59,6 +60,7 @@ print("Accuracy: ", "{:.2%}".format(compute_accuracy(pca_method.learning_result,
 pca_method.test_sample_reconstruction()
 
 # PCA method low dimension
+print("-----PCA_Low-Dimension-----")
 pca_method_low = PCA(test_samples,
                      train_samples,
                      train_results,
@@ -74,7 +76,7 @@ pca_method_low.projection()
 
 end_time = time.time()
 
-print("----- Compute Time: %s seconds -----" % (end_time - start_time))
+print("Compute Time: %s seconds" % (end_time - start_time))
 
 pca_method_low.compute_result()
 

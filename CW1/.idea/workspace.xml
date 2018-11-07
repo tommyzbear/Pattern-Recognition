@@ -2,12 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="2bad45f8-3a46-4150-8d59-0a7396985d54" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/CW1.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/CW1.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CW1.py" beforeDir="false" afterPath="$PROJECT_DIR$/CW1.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CW1_old.py" beforeDir="false" afterPath="$PROJECT_DIR$/CW1_old.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/image_data_processor.py" beforeDir="false" afterPath="$PROJECT_DIR$/image_data_processor.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pr_method.py" beforeDir="false" afterPath="$PROJECT_DIR$/pr_method.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CW1_main.py" beforeDir="false" afterPath="$PROJECT_DIR$/CW1_main.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pca.py" beforeDir="false" afterPath="$PROJECT_DIR$/pca.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -54,27 +50,27 @@
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
           <entry key="Python Console" value="1761" />
-          <entry key="dummy" value="15" />
-          <entry key="py" value="17997" />
+          <entry key="dummy" value="19" />
+          <entry key="py" value="18382" />
           <entry key="txt" value="15" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
-          <entry key="PLAIN_TEXT" value="30" />
-          <entry key="Python" value="19758" />
+          <entry key="PLAIN_TEXT" value="34" />
+          <entry key="Python" value="20143" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.open">
         <counts>
-          <entry key="py" value="27" />
+          <entry key="py" value="29" />
           <entry key="txt" value="2" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.open">
         <counts>
           <entry key="PLAIN_TEXT" value="2" />
-          <entry key="Python" value="27" />
+          <entry key="Python" value="29" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.vcs.git.usages" />
@@ -84,10 +80,10 @@
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/CW1_old.py">
+        <entry file="file://$PROJECT_DIR$/CW1_main.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="305">
-              <caret line="82" selection-start-line="82" selection-end-line="82" />
+            <state relative-caret-position="663">
+              <caret line="78" column="31" selection-start-line="78" selection-start-column="31" selection-end-line="78" selection-end-column="31" />
               <folding>
                 <element signature="e#0#26#0" expanded="true" />
               </folding>
@@ -98,23 +94,11 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/pca.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="328">
-              <caret line="113" column="63" lean-forward="true" selection-start-line="113" selection-start-column="63" selection-end-line="113" selection-end-column="63" />
+            <state relative-caret-position="238">
+              <caret line="59" column="80" selection-start-line="59" selection-start-column="80" selection-end-line="59" selection-end-column="80" />
               <folding>
                 <element signature="e#0#18#0" expanded="true" />
-                <marker date="1541597143838" expanded="true" signature="137:142" ph="..." />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/pr_method.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="427">
-              <caret line="107" column="24" selection-start-line="107" selection-start-column="12" selection-end-line="107" selection-end-column="24" />
-              <folding>
-                <element signature="e#0#24#0" expanded="true" />
+                <marker date="1541600713264" expanded="true" signature="148:153" ph="..." />
               </folding>
             </state>
           </provider>
@@ -123,8 +107,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/image_data_processor.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="223">
-              <caret line="94" selection-start-line="94" selection-end-line="94" />
+            <state relative-caret-position="747">
+              <caret line="73" column="18" lean-forward="true" selection-start-line="73" selection-start-column="18" selection-end-line="73" selection-end-column="18" />
               <folding>
                 <element signature="e#0#18#0" expanded="true" />
                 <marker date="1541589460323" expanded="true" signature="233:238" ph="..." />
@@ -133,31 +117,6 @@
                 <marker date="1541589460323" expanded="true" signature="3117:3122" ph="..." />
                 <marker date="1541589460323" expanded="true" signature="3196:3197" ph="..." />
                 <marker date="1541589460323" expanded="true" signature="3609:3610" ph="..." />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/eigen_face.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="153">
-              <caret line="9" column="34" lean-forward="true" selection-start-line="9" selection-start-column="34" selection-end-line="9" selection-end-column="34" />
-              <folding>
-                <element signature="e#0#18#0" expanded="true" />
-                <marker date="1540410889495" expanded="true" signature="55:269" ph="..." />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/CW1.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="255">
-              <caret line="33" selection-start-line="33" selection-end-line="33" selection-end-column="57" />
-              <folding>
-                <element signature="e#0#23#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -192,6 +151,7 @@
         <option value="$PROJECT_DIR$/image_data_processor.py" />
         <option value="$PROJECT_DIR$/CW1.py" />
         <option value="$PROJECT_DIR$/CW1_old.py" />
+        <option value="$PROJECT_DIR$/CW1_main.py" />
         <option value="$PROJECT_DIR$/pca.py" />
       </list>
     </option>
@@ -247,7 +207,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Python.CW1_old">
+  <component name="RunManager" selected="Python.CW1_main">
     <configuration name="CW1 (1)" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <module name="CW1" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -286,6 +246,25 @@
       <option name="SCRIPT_NAME" value="D:\EEE Year4\Pattern Recognition\CW1\CW1_main.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="CW1_main" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <module name="CW1" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/CW1_main.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="true" />
       <option name="EMULATE_TERMINAL" value="false" />
       <option name="MODULE_MODE" value="false" />
       <option name="REDIRECT_INPUT" value="false" />
@@ -360,9 +339,11 @@
       <item itemvalue="Python.test" />
       <item itemvalue="Python.CW1 (1)" />
       <item itemvalue="Python.CW1_old" />
+      <item itemvalue="Python.CW1_main" />
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="Python.CW1_main" />
         <item itemvalue="Python.CW1_old" />
         <item itemvalue="Python.CW1 (1)" />
         <item itemvalue="Python.test" />
@@ -411,11 +392,11 @@
       <window_info anchor="bottom" id="Database Changes" order="9" show_stripe_button="false" />
       <window_info anchor="bottom" id="Event Log" order="10" side_tool="true" />
       <window_info anchor="bottom" id="Terminal" order="11" weight="0.33049646" />
-      <window_info active="true" anchor="bottom" id="Python Console" order="12" visible="true" weight="0.33049646" />
+      <window_info anchor="bottom" id="Python Console" order="12" visible="true" weight="0.33049646" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
-      <window_info anchor="right" id="SciView" order="3" sideWeight="0.6728838" visible="true" weight="0.27449664" />
+      <window_info active="true" anchor="right" id="SciView" order="3" sideWeight="0.6728838" visible="true" weight="0.27449664" />
       <window_info anchor="right" id="Database" order="4" weight="0.3295302" />
       <window_info anchor="right" x="0" y="0" width="337" height="638" id="Documentation" order="5" sideWeight="0.32711622" side_tool="true" weight="0.39528432" />
     </layout>
@@ -453,16 +434,6 @@
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <breakpoints>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/pr_method.py</url>
-          <line>75</line>
-          <option name="timeStamp" value="58" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/pr_method.py</url>
-          <line>33</line>
-          <option name="timeStamp" value="60" />
-        </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/image_data_processor.py</url>
           <line>87</line>
@@ -567,24 +538,20 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/testing.py">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/eigen_face.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="153">
-          <caret line="9" column="34" lean-forward="true" selection-start-line="9" selection-start-column="34" selection-end-line="9" selection-end-column="34" />
-          <folding>
-            <element signature="e#0#18#0" expanded="true" />
-            <marker date="1540410889495" expanded="true" signature="55:269" ph="..." />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$USER_HOME$/Anaconda3/Lib/site-packages/matplotlib/image.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="149">
           <caret line="641" selection-start-line="641" selection-end-line="641" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/pr_method.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="223">
+          <caret line="107" column="24" selection-start-line="107" selection-start-column="12" selection-end-line="107" selection-end-column="24" />
+          <folding>
+            <element signature="e#0#24#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -598,10 +565,23 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/testing.py">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/eigen_face.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="153">
+          <caret line="9" column="34" lean-forward="true" selection-start-line="9" selection-start-column="34" selection-end-line="9" selection-end-column="34" />
+          <folding>
+            <element signature="e#0#18#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/image_data_processor.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="223">
-          <caret line="94" selection-start-line="94" selection-end-line="94" />
+        <state relative-caret-position="747">
+          <caret line="73" column="18" lean-forward="true" selection-start-line="73" selection-start-column="18" selection-end-line="73" selection-end-column="18" />
           <folding>
             <element signature="e#0#18#0" expanded="true" />
             <marker date="1541589460323" expanded="true" signature="233:238" ph="..." />
@@ -614,33 +594,23 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/CW1_old.py">
+    <entry file="file://$PROJECT_DIR$/CW1_main.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="305">
-          <caret line="82" selection-start-line="82" selection-end-line="82" />
+        <state relative-caret-position="663">
+          <caret line="78" column="31" selection-start-line="78" selection-start-column="31" selection-end-line="78" selection-end-column="31" />
           <folding>
             <element signature="e#0#26#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/pr_method.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="427">
-          <caret line="107" column="24" selection-start-line="107" selection-start-column="12" selection-end-line="107" selection-end-column="24" />
-          <folding>
-            <element signature="e#0#24#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/pca.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="328">
-          <caret line="113" column="63" lean-forward="true" selection-start-line="113" selection-start-column="63" selection-end-line="113" selection-end-column="63" />
+        <state relative-caret-position="238">
+          <caret line="59" column="80" selection-start-line="59" selection-start-column="80" selection-end-line="59" selection-end-column="80" />
           <folding>
             <element signature="e#0#18#0" expanded="true" />
-            <marker date="1541597143838" expanded="true" signature="137:142" ph="..." />
+            <marker date="1541600713264" expanded="true" signature="148:153" ph="..." />
           </folding>
         </state>
       </provider>
