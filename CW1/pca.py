@@ -1,6 +1,5 @@
 import numpy as np
 import image_data_processor as idp
-import matplotlib.pyplot as plt
 import sys
 
 

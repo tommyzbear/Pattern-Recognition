@@ -1,5 +1,6 @@
 from mat4py import loadmat
 import time
+from pca_lda import *
 from pca import *
 
 
@@ -48,7 +49,7 @@ results = np.asarray(data.get("l"))
 test_image_per_face = 2
 
 # State size of M
-M = 128
+M_pca = 128
 
 resolution = faces.shape[0]
 num_of_faces = faces.shape[-1]
@@ -57,7 +58,7 @@ num_of_distinct_face = idp.distinct_faces_num(num_of_faces, images_per_face)
 
 num_of_train_samples, num_of_test_samples, train_samples, test_samples, train_results, test_results = idp.split_train_test(
     num_of_faces, test_image_per_face, images_per_face, num_of_distinct_face, resolution, faces, results)
-
+'''
 # PCA method using Nearest Neighbour classification
 print("----- PCA NN_Classification -----")
 pca_method = PCA(test_samples,
@@ -66,7 +67,7 @@ pca_method = PCA(test_samples,
                  num_of_test_samples,
                  num_of_train_samples,
                  resolution,
-                 M)
+                 M_pca)
 
 start_time = time.time()
 
@@ -96,7 +97,7 @@ pca_method_low = PCA(test_samples,
                      num_of_test_samples,
                      num_of_train_samples,
                      resolution,
-                     M,
+                     M_pca,
                      True)
 
 start_time = time.time()
@@ -121,7 +122,7 @@ print("Eigen values memory usage: ", pca_method_low.eig_val_mem_usage, " bytes")
 
 # Alternative method
 print("----- PCA_Low-Dimension Alternative method -----")
-M = 5
+M_pca = 5
 train_image_per_face = images_per_face - test_image_per_face
 
 # Initialize error matrix
@@ -137,7 +138,7 @@ for i in range(0, num_of_train_samples, train_image_per_face):
                          num_of_test_samples,
                          train_image_per_face,
                          resolution,
-                         M,
+                         M_pca,
                          True)
     pca_method_low.projection()
     pca_method_low.test_sample_reconstruction()
@@ -155,5 +156,33 @@ for i in range(0, num_of_test_samples):
 end_time = time.time()
 
 print("Compute Time: %s seconds" % (end_time - start_time))
+
+print("Accuracy: ", "{:.2%}".format(compute_accuracy(results, test_results)))
+'''
+# PCA_LDA method
+print("----- PCA_LDA NN_Classification -----")
+
+# Define M for LDA
+M_lda = 51
+
+pca_lda_method = PCA_LDA(test_samples,
+                         train_samples,
+                         train_results,
+                         num_of_test_samples,
+                         num_of_train_samples,
+                         num_of_distinct_face,
+                         resolution,
+                         M_pca,
+                         M_lda)
+
+start_time = time.time()
+
+pca_lda_method.fit()
+
+end_time = time.time()
+
+print("Compute Time: %s seconds" % (end_time - start_time))
+
+results = nearest_neighbour(pca_lda_method)
 
 print("Accuracy: ", "{:.2%}".format(compute_accuracy(results, test_results)))
