@@ -67,13 +67,13 @@ class PCA_LDA:
         pca_best_eig_vec = pca.dimensioned_eig_vectors
 
         # Compute generalized eigen vectors and eigen values
-        numerator = pca_best_eig_vec.transpose() @ S_B @ pca_best_eig_vec
-        denominator = pca_best_eig_vec.transpose() @ S_W @ pca_best_eig_vec
+        temp = pca_best_eig_vec.transpose() @ S_B @ pca_best_eig_vec
+        temp_inv = pca_best_eig_vec.transpose() @ S_W @ pca_best_eig_vec
 
-        lda_eig_val, lda_eig_vec = np.linalg.eig(numerator @ np.linalg.inv(denominator))
+        lda_eig_val, lda_eig_vec = np.linalg.eig(np.linalg.inv(temp_inv) @ temp)
 
-        # numerator = abs(generalized_eig_vec.transpose() @ pca_best_eig_vec.transpose() @ S_B @ pca_best_eig_vec @ generalized_eig_vec)
-        # denominator = abs(generalized_eig_vec.transpose() @ pca_best_eig_vec.transpose() @ S_W @ pca_best_eig_vec @ generalized_eig_vec)
+        # temp = abs(generalized_eig_vec.transpose() @ pca_best_eig_vec.transpose() @ S_B @ pca_best_eig_vec @ generalized_eig_vec)
+        # temp_inv = abs(generalized_eig_vec.transpose() @ pca_best_eig_vec.transpose() @ S_W @ pca_best_eig_vec @ generalized_eig_vec)
 
         # Retrieve largest M eigen value indices in the array
         largest_eig_value_indices = np.argsort(lda_eig_val)[-self.M_lda:]
