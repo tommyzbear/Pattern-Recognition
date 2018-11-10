@@ -2,6 +2,8 @@ from mat4py import loadmat
 import time
 from pca_lda import *
 from pca import *
+import matplotlib.pyplot as plt
+from sklearn.metrics import confusion_matrix
 
 
 # Calculating classified accuracy
@@ -30,12 +32,12 @@ def nearest_neighbour(pca):
     return learning_result
 
 
-def confusion_matrix(num_of_distinct_faces, learning_results, test_results):
+'''def confusion_matrix(num_of_distinct_faces, learning_results, test_results):
     confusion_mat = np.zeros((num_of_distinct_face, num_of_distinct_face))
     for i in range(0, len(learning_results)):
         confusion_mat[int(learning_results[i] - 1), int(test_results[i] - 1)] += 1
 
-    return confusion_mat
+    return confusion_mat'''
 
 
 # Loading face information in .mat data file
@@ -119,6 +121,16 @@ idp.image_comparison(pca_method_low)
 print("Covariance memory usage: ", pca_method_low.cov_mem_usage, " bytes")
 print("Eigen vectors memory usage: ", pca_method_low.eig_vec_mem_usage, " bytes")
 print("Eigen values memory usage: ", pca_method_low.eig_val_mem_usage, " bytes")
+
+# Compute confusion matrix
+cnf_matrix = confusion_matrix(test_results.tolist(), results.tolist())
+np.set_printoptions(precision=2)
+
+plt.figure(figsize=(38.4, 21.6))
+
+idp.plot_confusion_matrix(cnf_matrix, classes=list(range(0, 53)), title='Confusion matrix, without normalization')
+
+plt.show()
 
 # Alternative method
 print("----- PCA_Low-Dimension Alternative method -----")
