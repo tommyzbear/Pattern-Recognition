@@ -159,3 +159,15 @@ def plot_confusion_matrix(cm, classes,
     plt.xlabel('Predicted label', fontsize=50)
     plt.tight_layout()
 
+
+def plot_eig_values(eig_values):
+    y = eig_values[0:415].tolist()
+    y.sort(reverse=True)
+    x = range(len(y))
+    plt.figure()
+    plt.bar(x, y, 1)
+    plt.xlabel(r'$\lambda_i: i^{th}$' + ' eigenvalue')
+    plt.ylabel('Real value')
+    plt.title(r'$N_{train} - 1$' + ' Eigenvalues of $S_c$')
+
+    plt.show()

@@ -85,6 +85,8 @@ print("Accuracy: ", "{:.2%}".format(compute_accuracy(results, test_results)))
 
 pca_method.test_sample_reconstruction()
 
+idp.print_image(pca_method.train_avg_vector)
+
 idp.image_comparison(pca_method)
 
 print("Covariance memory usage: ", pca_method.cov_mem_usage, " bytes")

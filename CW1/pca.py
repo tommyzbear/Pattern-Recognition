@@ -55,6 +55,9 @@ class PCA:
         # Compute eigen values and eigen vectors of the covariance matrix
         eig_values, eig_vectors = np.linalg.eig(cov)
 
+        # Plot Eigenvalues
+        # idp.plot_eig_values(eig_values.real)
+
         # Check memory usage for Covariance matrix and eigen values, eigen vectors
         self.cov_mem_usage = sys.getsizeof(cov)
         self.eig_vec_mem_usage = sys.getsizeof(eig_vectors)
