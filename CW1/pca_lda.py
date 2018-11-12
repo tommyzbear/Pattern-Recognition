@@ -1,6 +1,7 @@
 from pca import *
 import numpy as np
 
+
 class PCA_LDA:
     '''Fisherface'''
     def __init__(self,
@@ -66,22 +67,19 @@ class PCA_LDA:
         pca.projection()
         pca_best_eig_vec = pca.dimensioned_eig_vectors
 
-        # Compute generalized eigen vectors and eigen values
+        # Compute generalized eigenvectors and eigenvalues
         temp = pca_best_eig_vec.transpose() @ S_B @ pca_best_eig_vec
         temp_inv = pca_best_eig_vec.transpose() @ S_W @ pca_best_eig_vec
 
         lda_eig_val, lda_eig_vec = np.linalg.eig(np.linalg.inv(temp_inv) @ temp)
 
-        # temp = abs(generalized_eig_vec.transpose() @ pca_best_eig_vec.transpose() @ S_B @ pca_best_eig_vec @ generalized_eig_vec)
-        # temp_inv = abs(generalized_eig_vec.transpose() @ pca_best_eig_vec.transpose() @ S_W @ pca_best_eig_vec @ generalized_eig_vec)
-
-        # Retrieve largest M eigen value indices in the array
+        # Retrieve largest M eigenvalue indices in the array
         largest_eig_value_indices = np.argsort(lda_eig_val)[-self.M_lda:]
 
-        # Initialize best eigen vectors
+        # Initialize best eigenvectors
         best_lda_eig_vec = np.zeros((lda_eig_vec.shape[0], self.M_lda), dtype=np.complex)
 
-        # Retrieve corresponding eigen vectors mapping to top M eigen values
+        # Retrieve corresponding eigenvectors mapping to top M eigenvalues
         for i in range(0, self.M_lda):
             best_lda_eig_vec[:, i] = lda_eig_vec[:, largest_eig_value_indices[i]]
 

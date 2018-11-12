@@ -2,7 +2,6 @@ from pca_lda import *
 from mat4py import loadmat
 
 
-
 # Nearest Neighbour classification
 def nearest_neighbour(pca):
     learning_result = np.zeros(pca.num_of_test_samples)
