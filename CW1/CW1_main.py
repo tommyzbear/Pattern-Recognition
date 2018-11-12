@@ -130,7 +130,8 @@ np.set_printoptions(precision=2)
 
 plt.figure(figsize=(38.4, 21.6))
 
-idp.plot_confusion_matrix(cnf_matrix, classes=list(range(0, 53)), title='Confusion matrix, without normalization')
+idp.plot_confusion_matrix(cnf_matrix, classes=list(range(0, 53)),
+                          title="Confusion matrix, without normalization \n PCA NN method")
 
 plt.show()
 
@@ -174,6 +175,17 @@ print("Compute Time: %s seconds" % (end_time - start_time))
 
 print("Accuracy: ", "{:.2%}".format(compute_accuracy(results, test_results)))
 
+# Compute confusion matrix
+cnf_matrix = confusion_matrix(test_results.tolist(), results.tolist())
+np.set_printoptions(precision=2)
+
+plt.figure(figsize=(38.4, 21.6))
+
+idp.plot_confusion_matrix(cnf_matrix, classes=list(range(0, 53)),
+                          title="Confusion matrix, without normalization \n PCA Alternative method")
+
+plt.show()
+
 # PCA_LDA method
 print("----- PCA_LDA NN_Classification -----")
 # Define M for LDA
@@ -200,3 +212,14 @@ print("Compute Time: %s seconds" % (end_time - start_time))
 results = nearest_neighbour(pca_lda_method)
 
 print("Accuracy: ", "{:.2%}".format(compute_accuracy(results, test_results)))
+
+# Compute confusion matrix
+cnf_matrix = confusion_matrix(test_results.tolist(), results.tolist())
+np.set_printoptions(precision=2)
+
+plt.figure(figsize=(38.4, 21.6))
+
+idp.plot_confusion_matrix(cnf_matrix, classes=list(range(0, 53)),
+                          title="Confusion matrix, without normalization \n PCA_LDA NN method")
+
+plt.show()
