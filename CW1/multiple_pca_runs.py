@@ -1,7 +1,7 @@
 from mat4py import loadmat
-import time
 from pca import *
 from operator import add
+import matplotlib.pyplot as plt
 
 
 def pca_with_diff_M(M_list, test_samples, train_samples, train_results, num_of_test_samples, num_of_train_samples, resolution):
@@ -67,7 +67,7 @@ resolution = faces.shape[0]
 num_of_faces = faces.shape[-1]
 images_per_face = idp.images_per_person(results)
 num_of_distinct_face = idp.distinct_faces_num(num_of_faces, images_per_face)
-
+'''
 M_list = [27, 41, 67, 128, 290]
 
 run_num = 10
@@ -91,4 +91,38 @@ for i in range(0, run_num):
 accuracy_avg = [element / run_num for element in accuracy_list]
 
 print(accuracy_avg)
+'''
+# PCA accuracy versus M
+num_of_train_samples, num_of_test_samples, train_samples, test_samples, train_results, test_results = idp.split_train_test(
+        num_of_faces, test_image_per_face, images_per_face, num_of_distinct_face, resolution, faces, results)
 
+M_list = range(0, 415)
+accuracy_list = []
+
+for M in M_list:
+    pca_method_low = PCA(test_samples,
+                         train_samples,
+                         train_results,
+                         num_of_test_samples,
+                         num_of_train_samples,
+                         resolution,
+                         M,
+                         True)
+
+    pca_method_low.projection()
+
+    results = nearest_neighbour(pca_method_low)
+
+    accuracy = compute_accuracy(results, test_results)
+
+    accuracy_list.append(accuracy)
+
+plt.figure()
+accuracy_list = [i * 100 for i in accuracy_list]
+plt.plot(M_list, accuracy_list)
+plt.xlabel(r'$M_{pca}$')
+plt.ylabel('Accuracy %')
+plt.title(r'PCA Result Accuracy With different $M_{pca}$')
+plt.show()
+
+print('Finished')

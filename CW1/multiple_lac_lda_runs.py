@@ -1,6 +1,6 @@
 from pca_lda import *
-import time
 from mat4py import loadmat
+
 
 
 # Nearest Neighbour classification
