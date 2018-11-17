@@ -4,6 +4,8 @@ from pca_lda import *
 from pca import *
 from fusion_rules import *
 import numpy as np
+import matplotlib.pyplot as plt
+from sklearn.metrics import confusion_matrix
 
 
 def bagging(train_samples, train_results, T, N):
@@ -173,4 +175,16 @@ print("Sum rule Accuracy: ", "{:.2%}".format(compute_accuracy(sum_rule_result, t
 #                            pca_lda_method.train_sample_projection,
 #                            pca_lda_method.train_results)
 # print("Averaging Accuracy: ", "{:.2%}".format(compute_accuracy(result, test_results)))
+
+# Compute confusion matrix
+cnf_matrix = confusion_matrix(test_results, sum_rule_result)
+np.set_printoptions(precision=2)
+
+plt.figure(figsize=(38.4, 21.6))
+
+idp.plot_confusion_matrix(cnf_matrix, classes=list(range(0, 53)),
+                          title="Confusion matrix, without normalization \n Ensemble_PCA_LDA Fusion rule")
+
+plt.show()
+
 
