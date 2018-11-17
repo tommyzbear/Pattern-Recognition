@@ -145,6 +145,15 @@ print("Majority voting Accuracy: ", "{:.2%}".format(compute_accuracy(majority_re
 sum_rule_result = sum_rule(np.concatenate((probability_array_random_feature, probability_array_random_data), axis=0))
 print("Sum rule Accuracy: ", "{:.2%}".format(compute_accuracy(sum_rule_result, test_results)))
 
+# Prod rule
+# prod_rule_result = prod_rule(np.concatenate((probability_array_random_feature, probability_array_random_data), axis=0))
+# print("Prod rule Accuracy: ", "{:.2%}".format(compute_accuracy(prod_rule_result, test_results)))
+
+# Max rule
+# max_rule_result = max_rule(np.concatenate((probability_array_random_feature, probability_array_random_data), axis=0))
+# print("Max rule Accuracy: ", "{:.2%}".format(compute_accuracy(prod_rule_result, test_results)))
+
+
 #
 # # Averaging
 # test_projections_averaging = np.sum(test_sample_projection_array, axis=0)

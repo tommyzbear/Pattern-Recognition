@@ -2,9 +2,6 @@ from collections import Counter
 import numpy as np
 
 
-#def probabilistic_summation(results_array):
-#def probabilistic_multiplication(results_array):
-
 def majority_voting(results_array):
     majority_results = np.zeros(results_array.shape[-1])
     for i in range(0, results_array.shape[-1]):
@@ -28,10 +25,22 @@ def sum_rule(probability_array):
 
     return result
 
-#def sum_rule(results_array):
+
+def prod_rule(probability_array):
+    probability_prod = np.prod(probability_array, axis=0)
+    result = []
+    for i in range(probability_array.shape[1]):
+        result.append(np.argmax(probability_prod[i, :]) + 1)
+
+    return result
 
 
-#def probabilistic_max(results_array)：
+def max_rule(probability_array):
+    probability_max = np.max(probability_array, axis=0)
+    result = []
+    for i in range(probability_array.shape[1]):
+        result.append(np.argmax(probability_max[i, :]) + 1)
 
+    return result
 
 #def probabilistic_min(results_array)：
