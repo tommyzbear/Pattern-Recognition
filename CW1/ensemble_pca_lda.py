@@ -139,6 +139,8 @@ for i in range(T):
 
     probability_array_random_data[i, :] = probability_given_classifier(lda_method)
 
+
+
 # Majority voting
 majority_result = majority_voting(np.concatenate((results_array_random_feature, results_array_random_data), axis=0))
 print("Majority voting Accuracy: ", "{:.2%}".format(compute_accuracy(majority_result, test_results)))
@@ -187,4 +189,8 @@ idp.plot_confusion_matrix(cnf_matrix, classes=list(range(0, 53)),
 
 plt.show()
 
-
+# committee machine
+test_sample_projection_array_concat = np.concatenate((test_sample_projection_array_feature, test_sample_projection_array_data), axis=0)
+committee_machine_sum = np.sum(test_sample_projection_array_concat, axis = 0)
+committee_machine = np.array(committee_machine_sum)/T
+print('hi')
