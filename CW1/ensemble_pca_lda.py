@@ -3,6 +3,7 @@ from mat4py import loadmat
 from pca_lda import *
 from pca import *
 from fusion_rules import *
+import numpy as np
 
 
 def bagging(train_samples, train_results, T, N):
@@ -129,11 +130,9 @@ for i in range(T):
                                                         lda_method.train_sample_projection,
                                                         lda_method.train_results)
 
-
-#
-# # Majority voting
-# majority_result = majority_voting(results_array)
-# print("Majority voting Accuracy: ", "{:.2%}".format(compute_accuracy(majority_result, test_results)))
+# Majority voting
+majority_result = majority_voting(np.concatenate((results_array_random_feature, results_array_random_feature), axis=0))
+print("Majority voting Accuracy: ", "{:.2%}".format(compute_accuracy(majority_result, test_results)))
 #
 # # Averaging
 # test_projections_averaging = np.sum(test_sample_projection_array, axis=0)

@@ -30,15 +30,16 @@ class PCA_LDA:
         self.opt_eig_vec = None
         self.train_sample_projection = None
         self.test_sample_projection = None
+        self.class_mean = None
 
     def fit(self):
         train_sample_per_class = int(self.train_samples.shape[-1] / self.num_of_distinct_samples)
-        class_mean = np.zeros((self.resolution, self.num_of_distinct_samples))
-        for i in range(0, class_mean.shape[-1]):
-            class_mean[:, i] = self.train_samples[:,
+        self.class_mean = np.zeros((self.resolution, self.num_of_distinct_samples))
+        for i in range(0, self.class_mean.shape[-1]):
+            self.class_mean[:, i] = self.train_samples[:,
                                i * train_sample_per_class: (i + 1) * train_sample_per_class].mean(1)
 
-        class_normalized_mean = class_mean - self.train_avg_vector
+        class_normalized_mean = self.class_mean - self.train_avg_vector
 
         # Between-class scatter matrix
         S_B = class_normalized_mean @ class_normalized_mean.T
@@ -124,15 +125,16 @@ class LDA:
         self.opt_eig_vec = None
         self.train_sample_projection = None
         self.test_sample_projection = None
+        self.class_mean = None
 
     def fit(self):
         train_sample_per_class = int(self.train_samples.shape[-1] / self.num_of_distinct_samples)
-        class_mean = np.zeros((self.resolution, self.num_of_distinct_samples))
-        for i in range(0, class_mean.shape[-1]):
-            class_mean[:, i] = self.train_samples[:,
+        self.class_mean = np.zeros((self.resolution, self.num_of_distinct_samples))
+        for i in range(0, self.class_mean.shape[-1]):
+            self.class_mean[:, i] = self.train_samples[:,
                                i * train_sample_per_class: (i + 1) * train_sample_per_class].mean(1)
 
-        class_normalized_mean = class_mean - self.train_avg_vector
+        class_normalized_mean = self.class_mean - self.train_avg_vector
 
         # Between-class scatter matrix
         S_B = class_normalized_mean @ class_normalized_mean.T
