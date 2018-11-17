@@ -1,9 +1,8 @@
 from random import randrange
 from mat4py import loadmat
-import numpy as np
-import image_data_processor as idp
-from pca import *
 from pca_lda import *
+from pca import *
+from fusion_rules import *
 
 
 def bagging(train_samples, train_results, T, N):
@@ -11,30 +10,36 @@ def bagging(train_samples, train_results, T, N):
     train_results_bag = np.zeros((T, train_results.shape[0]))
     for i in range(0, T):
         for j in range(0, N):
-            index = randrange(train_samples.shape[-1])
+            index = randrange(N)
             data_set[i, :, j] = train_samples[:, index]
             train_results_bag[i, j] = train_results[index]
     return data_set, train_results_bag
 
 
-def random_in_feature(bag, M0, Ntrain):
-    M1 = randrange(Ntrain - M0 - 1)
-    M_feature = M0 + M1
+# Calculating classified accuracy
+def compute_accuracy(test_result, actual_result):
+    correct = 0
+    for i in range(0, len(test_result)):
+        if test_result[i] == actual_result[i]:
+            correct += 1
+    return correct / len(test_result)
 
-def nearest_neighbour(pca):
-    learning_result = np.zeros(pca.num_of_test_samples)
+
+def nearest_neighbour(num_of_test_samples, test_sample_projection, train_sample_projection, train_results):
+    learning_result = np.zeros(num_of_test_samples)
     i = 0
     # Compute learning result by using Nearest Neighbour classification
-    for test_projection in pca.test_sample_projection:
-        error = np.zeros((pca.train_sample_projection.shape[0]))
+    for test_projection in test_sample_projection:
+        error = np.zeros((train_sample_projection.shape[0]))
         index = 0
-        for train_projection in pca.train_sample_projection:
+        for train_projection in train_sample_projection:
             error[index] = np.linalg.norm(test_projection - train_projection)
             index += 1
-        learning_result[i] = pca.train_results[np.argmin(error)]
+        learning_result[i] = train_results[np.argmin(error)]
         i += 1
 
     return learning_result
+
 
 # Loading face information in .mat data file
 data = loadmat('face.mat')
@@ -46,9 +51,6 @@ results = np.asarray(data.get("l"))
 # State test image per face
 test_image_per_face = 2
 
-# State size of M, 128 is 95% of the covariances
-M_pca = 128
-
 resolution = faces.shape[0]
 num_of_faces = faces.shape[-1]
 images_per_face = idp.images_per_person(results)
@@ -58,23 +60,20 @@ num_of_train_samples, num_of_test_samples, train_samples, test_samples, train_re
     num_of_faces, test_image_per_face, images_per_face, num_of_distinct_face, resolution, faces, results)
 
 T = 10
-N = train_samples.shape[-1]
-bag, train_results_bag = bagging(train_samples, train_results, T, N)
+bag_train_samples, train_results_bag = bagging(train_samples, train_results, T, num_of_train_samples)
 
 M0 = 100
-results_array = np.zeros((T, test_samples.shape[-1]))
+results_array_random_feature = np.zeros((T, num_of_test_samples))
+results_array_random_data = np.zeros((T, num_of_test_samples))
 
 M_lda = 51
 
-test_sample_projection_array = np.zeros((T, test_samples.shape[-1],
-                                         M_lda))
+test_sample_projection_array_feature = np.zeros((T, num_of_test_samples, M_lda))
+test_sample_projection_array_data = np.zeros((T, num_of_test_samples, M_lda))
 
 for i in range(T):
-    M1 = randrange(N - M0 - 1)
+    M1 = randrange(num_of_train_samples - M0 - 1)
     M_pca = M0 + M1
-    # Get low-dimension PCA training projections
-    train_samples = bag[i, :, :]
-    train_results = train_results_bag[i, :]
 
     pca_lda_method = PCA_LDA(test_samples,
                              train_samples,
@@ -88,11 +87,70 @@ for i in range(T):
 
     pca_lda_method.fit()
 
-    test_sample_projection_array[i, :, :] = pca_lda_method.test_sample_projection
+    test_sample_projection_array_feature[i, :, :] = pca_lda_method.test_sample_projection
 
-    results_array[i, :] = nearest_neighbour(pca_lda_method) # 10,104,51
+    # 10,104,51
+    results_array_random_feature[i, :] = nearest_neighbour(pca_lda_method.num_of_test_samples,
+                                                           pca_lda_method.test_sample_projection,
+                                                           pca_lda_method.train_sample_projection,
+                                                           pca_lda_method.train_results)
 
-# committee machine
-committee_machine_sum = np.sum(test_sample_projection_array, axis=0)
-committee_machine = np.array(committee_machine_sum)/T
-print('hi')
+pca = PCA(test_samples,
+          train_samples,
+          train_results,
+          num_of_test_samples,
+          num_of_train_samples,
+          resolution,
+          128,
+          True)
+
+pca.projection()
+
+for i in range(T):
+    bag_train_samples, bag_train_results = bagging(train_samples, train_results, T, num_of_train_samples)
+
+    lda_method = LDA(test_samples,
+                     bag_train_samples[i],
+                     bag_train_results[i],
+                     num_of_test_samples,
+                     num_of_train_samples,
+                     num_of_distinct_face,
+                     resolution,
+                     M_lda,
+                     pca)
+
+    lda_method.fit()
+
+    test_sample_projection_array_data[i, :, :] = lda_method.test_sample_projection
+
+    # 10,104,51
+    results_array_random_data[i, :] = nearest_neighbour(lda_method.num_of_test_samples,
+                                                        lda_method.test_sample_projection,
+                                                        lda_method.train_sample_projection,
+                                                        lda_method.train_results)
+
+
+#
+# # Majority voting
+# majority_result = majority_voting(results_array)
+# print("Majority voting Accuracy: ", "{:.2%}".format(compute_accuracy(majority_result, test_results)))
+#
+# # Averaging
+# test_projections_averaging = np.sum(test_sample_projection_array, axis=0)
+# test_projections_averaging = np.array(test_projections_averaging) / T
+# pca_lda_method = PCA_LDA(test_samples,
+#                          train_samples,
+#                          train_results,
+#                          num_of_test_samples,
+#                          num_of_train_samples,
+#                          num_of_distinct_face,
+#                          resolution,
+#                          M_pca,
+#                          M_lda)
+# pca_lda_method.fit()
+# result = nearest_neighbour(pca_lda_method.num_of_test_samples,
+#                            pca_lda_method.test_sample_projection,
+#                            pca_lda_method.train_sample_projection,
+#                            pca_lda_method.train_results)
+# print("Averaging Accuracy: ", "{:.2%}".format(compute_accuracy(result, test_results)))
+
