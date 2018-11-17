@@ -62,6 +62,12 @@ N = train_samples.shape[-1]
 bag, train_results_bag = bagging(train_samples, train_results, T, N)
 
 M0 = 100
+results_array = np.zeros((T, test_samples.shape[-1]))
+
+M_lda = 51
+
+test_sample_projection_array = np.zeros((T, test_samples.shape[-1],
+                                         M_lda))
 
 for i in range(T):
     M1 = randrange(N - M0 - 1)
@@ -69,8 +75,6 @@ for i in range(T):
     # Get low-dimension PCA training projections
     train_samples = bag[i, :, :]
     train_results = train_results_bag[i, :]
-
-    M_lda = 51
 
     pca_lda_method = PCA_LDA(test_samples,
                              train_samples,
@@ -83,4 +87,12 @@ for i in range(T):
                              M_lda)
 
     pca_lda_method.fit()
-    results = nearest_neighbour(pca_lda_method)
+
+    test_sample_projection_array[i, :, :] = pca_lda_method.test_sample_projection
+
+    results_array[i, :] = nearest_neighbour(pca_lda_method) # 10,104,51
+
+# committee machine
+committee_machine_sum = np.sum(test_sample_projection_array, axis=0)
+committee_machine = np.array(committee_machine_sum)/T
+print('hi')

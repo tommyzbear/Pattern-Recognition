@@ -92,6 +92,7 @@ class PCA_LDA:
         normalized_test_samples = self.test_sample - self.train_avg_vector
 
         self.train_sample_projection = normalized_train_samples.transpose() @ self.opt_eig_vec.transpose()
+
         self.test_sample_projection = normalized_test_samples.transpose() @ self.opt_eig_vec.transpose()
 
 
