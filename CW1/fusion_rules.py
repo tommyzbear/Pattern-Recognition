@@ -20,6 +20,14 @@ def probability_given_classifier(lda):
     return ((1 + (numerator / denominator)) / 2).real
 
 
+def sum_rule(probability_array):
+    probability_sum = sum(probability_array)
+    result = []
+    for i in range(probability_array.shape[1]):
+        result.append(np.argmax(probability_sum[i, :]) + 1)
+
+    return result
+
 #def sum_rule(results_array):
 
 

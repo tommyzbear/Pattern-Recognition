@@ -181,7 +181,6 @@ class LDA:
         self.test_sample_projection = normalized_test_samples.transpose() @ self.opt_eig_vec.transpose()
 
 
-
 def avg_face_vector(samples, resolution, num_of_samples):
     faces_sum = np.zeros(resolution)
 

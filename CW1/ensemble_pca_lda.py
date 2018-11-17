@@ -72,6 +72,9 @@ M_lda = 51
 test_sample_projection_array_feature = np.zeros((T, num_of_test_samples, M_lda))
 test_sample_projection_array_data = np.zeros((T, num_of_test_samples, M_lda))
 
+probability_array_random_feature = np.zeros((T, num_of_test_samples, num_of_distinct_face))
+probability_array_random_data = np.zeros((T, num_of_test_samples, num_of_distinct_face))
+
 for i in range(T):
     M1 = randrange(num_of_train_samples - M0 - 1)
     M_pca = M0 + M1
@@ -95,6 +98,8 @@ for i in range(T):
                                                            pca_lda_method.test_sample_projection,
                                                            pca_lda_method.train_sample_projection,
                                                            pca_lda_method.train_results)
+
+    probability_array_random_feature[i, :] = probability_given_classifier(pca_lda_method)
 
 pca = PCA(test_samples,
           train_samples,
@@ -130,9 +135,16 @@ for i in range(T):
                                                         lda_method.train_sample_projection,
                                                         lda_method.train_results)
 
+    probability_array_random_data[i, :] = probability_given_classifier(lda_method)
+
 # Majority voting
-majority_result = majority_voting(np.concatenate((results_array_random_feature, results_array_random_feature), axis=0))
+majority_result = majority_voting(np.concatenate((results_array_random_feature, results_array_random_data), axis=0))
 print("Majority voting Accuracy: ", "{:.2%}".format(compute_accuracy(majority_result, test_results)))
+
+# Sum rule
+sum_rule_result = sum_rule(np.concatenate((probability_array_random_feature, probability_array_random_data), axis=0))
+print("Sum rule Accuracy: ", "{:.2%}".format(compute_accuracy(sum_rule_result, test_results)))
+
 #
 # # Averaging
 # test_projections_averaging = np.sum(test_sample_projection_array, axis=0)
