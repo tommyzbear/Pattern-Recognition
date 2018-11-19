@@ -100,6 +100,54 @@ def sample_reconstruction(num_of_faces, projections, resolutions, best_eigen_vec
     return train_faces_reconstructed
 
 
+def false_correct_image(results, test_results, test_samples, pca, is_lda=False):
+    temp = results - test_results
+    count = 0
+    for i in range(len(temp)):
+        if is_lda is False:
+            if temp[i] == 0:
+                plt.subplot(421 + count * 2)
+                plt.title('Correct')
+                image = test_samples[:, i].reshape(46, 56).T
+                plt.imshow(image, cmap='gist_gray')
+                plt.subplot(421 + count * 2 + 1)
+                plt.title('Projected')
+                image = pca.test_sample_reconstructed[:, i].real.reshape(46, 56).T
+                plt.imshow(image, cmap='gist_gray')
+                count += 1
+        else:
+            if temp[i] == 0:
+                plt.subplot(221 + count)
+                plt.title('Correct')
+                image = test_samples[:, i].reshape(46, 56).T
+                plt.imshow(image, cmap='gist_gray')
+                count += 1
+        if count == 2:
+            break
+    for i in range(len(temp)):
+        if is_lda is False:
+            if temp[i] != 0:
+                plt.subplot(421 + count * 2)
+                plt.title('Incorrect')
+                image = test_samples[:, i].reshape(46, 56).T
+                plt.imshow(image, cmap='gist_gray')
+                plt.subplot(421 + count * 2 + 1)
+                plt.title('Projected')
+                image = pca.test_sample_reconstructed[:, i].real.reshape(46, 56).T
+                plt.imshow(image, cmap='gist_gray')
+                count += 1
+        else:
+            if temp[i] != 0:
+                plt.subplot(221 + count)
+                plt.title('Incorrect')
+                image = test_samples[:, i].reshape(46, 56).T
+                plt.imshow(image, cmap='gist_gray')
+                count += 1
+        if count == 4:
+            break
+    plt.show()
+
+
 def image_comparison(pca):
     first_reconstructed_image = pca.test_sample_reconstructed[:, 0].real.reshape(46, 56).T
     second_reconstructed_image = pca.test_sample_reconstructed[:, 1].real.reshape(46, 56).T

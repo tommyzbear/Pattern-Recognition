@@ -112,6 +112,8 @@ pca_method_low.test_sample_reconstruction()
 
 idp.image_comparison(pca_method_low)
 
+idp.false_correct_image(results, test_results, test_samples, pca_method_low)
+
 print("Covariance memory usage: ", pca_method_low.cov_mem_usage, " bytes")
 print("Eigen vectors memory usage: ", pca_method_low.eig_vec_mem_usage, " bytes")
 print("Eigen values memory usage: ", pca_method_low.eig_val_mem_usage, " bytes")
@@ -204,6 +206,8 @@ print("Compute Time: %s seconds" % (end_time - start_time))
 results = nearest_neighbour(pca_lda_method)
 
 print("Accuracy: ", "{:.2%}".format(compute_accuracy(results, test_results)))
+
+idp.false_correct_image(results, test_results, test_samples, pca_lda_method, is_lda=True)
 
 # Compute confusion matrix
 cnf_matrix = confusion_matrix(test_results.tolist(), results.tolist())

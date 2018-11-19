@@ -39,8 +39,8 @@ results = np.asarray(data.get("l"))
 test_image_per_face = 2
 
 # Define M_pca values and M_lda values
-M_pca_list = [67, 128, 290, 364]
-M_lda_list = [5, 10, 20, 30, 40, 51]
+M_pca_list = [51, 100, 150, 200, 250, 300, 350, 400]
+M_lda_list = [5, 10, 15, 20, 25, 30, 40, 51]
 
 resolution = faces.shape[0]
 num_of_faces = faces.shape[-1]
@@ -51,36 +51,20 @@ num_of_train_samples, num_of_test_samples, train_samples, test_samples, train_re
     num_of_faces, test_image_per_face, images_per_face, num_of_distinct_face, resolution, faces, results)
 
 # Varying M_pca while keeping M_lda constant
-M_lda = 51
-print("-----Varying M_pca keeping M_lda = %i-----" % M_lda)
 for M_pca in M_pca_list:
-    pca_lda_method = PCA_LDA(test_samples,
-                             train_samples,
-                             train_results,
-                             num_of_test_samples,
-                             num_of_train_samples,
-                             num_of_distinct_face,
-                             resolution,
-                             M_pca,
-                             M_lda)
+    for M_lda in M_lda_list:
+        pca_lda_method = PCA_LDA(test_samples,
+                                 train_samples,
+                                 train_results,
+                                 num_of_test_samples,
+                                 num_of_train_samples,
+                                 num_of_distinct_face,
+                                 resolution,
+                                 M_pca,
+                                 M_lda)
 
-    pca_lda_method.fit()
-    results = nearest_neighbour(pca_lda_method)
-    print("M_pca = %i, " % M_pca, "Accuracy: ", "{:.2%}".format(compute_accuracy(results, test_results)))
-
-# Varying M_lda while keeping M_pca constant
-M_pca = 290
-print("-----Varying M_lda keeping M_pca = %i-----" % M_pca)
-for M_lda in M_lda_list:
-    pca_lda_method = PCA_LDA(test_samples,
-                             train_samples,
-                             train_results,
-                             num_of_test_samples,
-                             num_of_train_samples,
-                             num_of_distinct_face,
-                             resolution,
-                             M_pca,
-                             M_lda)
-    pca_lda_method.fit()
-    results = nearest_neighbour(pca_lda_method)
-    print("M_lda = %i, " % M_lda, "Accuracy: ", "{:.2%}".format(compute_accuracy(results, test_results)))
+        pca_lda_method.fit()
+        results = nearest_neighbour(pca_lda_method)
+        print("M_pca = %i, " % M_pca,
+              "M_lda = %i, " % M_lda,
+              "Accuracy: ", "{:.2%}".format(compute_accuracy(results, test_results)))
