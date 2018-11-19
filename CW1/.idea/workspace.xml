@@ -2,18 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="2bad45f8-3a46-4150-8d59-0a7396985d54" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/Alternative_method_results.PNG" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Cnf_mat_PCA_Alternative.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Cnf_mat_PCA_LDA_NN.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Cnf_mat_PCA_NN.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/PCA_Accuracy_vs_M_pca.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/PCA_LDA_Results_Comparison.PNG" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/PCA_Low_method_results.PNG" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/PCA_Results_Comparison.PNG" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Sorted_Eigenvalues.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/actual_reconstructed_comparison.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ensemble_pca_lda.py" beforeDir="false" afterPath="$PROJECT_DIR$/ensemble_pca_lda.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/mean_face.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CW1_main.py" beforeDir="false" afterPath="$PROJECT_DIR$/CW1_main.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -47,20 +37,20 @@
     <session id="-50339612">
       <usages-collector id="statistics.lifecycle.project">
         <counts>
-          <entry key="project.closed" value="22" />
+          <entry key="project.closed" value="23" />
           <entry key="project.open.time.0" value="1" />
           <entry key="project.open.time.1" value="2" />
           <entry key="project.open.time.10" value="1" />
           <entry key="project.open.time.11" value="2" />
           <entry key="project.open.time.12" value="8" />
           <entry key="project.open.time.13" value="5" />
-          <entry key="project.open.time.14" value="1" />
+          <entry key="project.open.time.14" value="2" />
           <entry key="project.open.time.15" value="1" />
           <entry key="project.open.time.17" value="1" />
           <entry key="project.open.time.18" value="2" />
           <entry key="project.open.time.19" value="1" />
           <entry key="project.open.time.36" value="1" />
-          <entry key="project.opened" value="26" />
+          <entry key="project.opened" value="27" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
@@ -68,7 +58,7 @@
           <entry key="Python Console" value="3204" />
           <entry key="dummy" value="35" />
           <entry key="ensemble_pca_lda" value="254" />
-          <entry key="py" value="29151" />
+          <entry key="py" value="29157" />
           <entry key="txt" value="15" />
           <entry key="vmoptions" value="10" />
         </counts>
@@ -76,12 +66,12 @@
       <usages-collector id="statistics.file.types.edit">
         <counts>
           <entry key="PLAIN_TEXT" value="60" />
-          <entry key="Python" value="32609" />
+          <entry key="Python" value="32615" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.open">
         <counts>
-          <entry key="py" value="48" />
+          <entry key="py" value="51" />
           <entry key="txt" value="2" />
           <entry key="vmoptions" value="2" />
         </counts>
@@ -89,7 +79,7 @@
       <usages-collector id="statistics.file.types.open">
         <counts>
           <entry key="PLAIN_TEXT" value="4" />
-          <entry key="Python" value="48" />
+          <entry key="Python" value="51" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.vcs.git.usages" />
@@ -137,7 +127,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/pca_lda.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="158">
+            <state relative-caret-position="1411">
               <caret line="84" selection-start-line="84" selection-end-line="84" />
               <folding>
                 <element signature="e#0#17#0" expanded="true" />
@@ -149,7 +139,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/image_data_processor.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="2567">
+            <state relative-caret-position="1768">
               <caret line="151" column="26" selection-start-line="151" selection-start-column="26" selection-end-line="151" selection-end-column="26" />
               <folding>
                 <element signature="e#0#18#0" expanded="true" />
@@ -161,7 +151,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/pca.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1462">
+            <state relative-caret-position="1428">
               <caret line="86" column="40" selection-start-line="86" selection-start-column="17" selection-end-line="86" selection-end-column="40" />
               <folding>
                 <element signature="e#0#18#0" expanded="true" />
@@ -173,32 +163,34 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/CW1_main.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="85">
-              <caret line="5" column="10" selection-start-line="5" selection-end-line="6" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/ensemble_pca_lda.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="148">
-              <caret line="144" selection-start-line="144" selection-end-line="144" />
+            <state relative-caret-position="357">
+              <caret line="75" column="77" selection-start-line="55" selection-end-line="75" selection-end-column="77" />
               <folding>
-                <element signature="e#0#28#0" expanded="true" />
-                <marker date="1542543139633" expanded="true" signature="2122:5184" ph="..." />
+                <element signature="e#0#26#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/fusion_rules.py">
+        <entry file="file://$PROJECT_DIR$/CW1_alternative.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="187">
-              <caret line="20" column="44" lean-forward="true" selection-start-line="20" selection-start-column="44" selection-end-line="20" selection-end-column="44" />
+            <state relative-caret-position="-170">
+              <caret line="70" selection-start-line="70" selection-end-line="70" />
               <folding>
-                <element signature="e#0#31#0" expanded="true" />
+                <element signature="e#0#26#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/CW1_pca.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="102">
+              <caret line="24" column="27" lean-forward="true" selection-start-line="24" selection-start-column="27" selection-end-line="24" selection-end-column="27" />
+              <folding>
+                <element signature="e#0#26#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -207,10 +199,43 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/CW1_pca_low.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1428">
-              <caret line="84" column="55" selection-start-line="84" selection-end-line="85" />
+            <state relative-caret-position="1020">
+              <caret line="66" column="35" selection-start-line="66" selection-start-column="35" selection-end-line="66" selection-end-column="35" />
               <folding>
                 <element signature="e#0#26#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/ensemble_pca_lda.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="148">
+              <caret line="144" selection-start-line="144" selection-end-line="144" />
+              <folding>
+                <element signature="e#0#28#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/multiple_pca_runs.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-221">
+              <caret line="9" column="12" selection-start-line="9" selection-start-column="12" selection-end-line="9" selection-end-column="12" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/fusion_rules.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="323">
+              <caret line="20" column="44" selection-start-line="20" selection-start-column="44" selection-end-line="20" selection-end-column="44" />
+              <folding>
+                <element signature="e#0#31#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -267,7 +292,6 @@
         <option value="$PROJECT_DIR$/CW1_old.py" />
         <option value="$PROJECT_DIR$/image_data_processor.py" />
         <option value="$PROJECT_DIR$/pca.py" />
-        <option value="$PROJECT_DIR$/CW1_main.py" />
         <option value="$PROJECT_DIR$/multiple_pca_runs.py" />
         <option value="$PROJECT_DIR$/multiple_lac_lda_runs.py" />
         <option value="$PROJECT_DIR$/CW1_pca_low.py" />
@@ -277,6 +301,8 @@
         <option value="$PROJECT_DIR$/fusion_rules.py" />
         <option value="$USER_HOME$/AppData/Local/JetBrains/Toolbox/apps/PyCharm-P/ch-0/182.4505.26.vmoptions" />
         <option value="$PROJECT_DIR$/ensemble_pca_lda.py" />
+        <option value="$PROJECT_DIR$/CW1_main.py" />
+        <option value="$PROJECT_DIR$/CW1_pca.py" />
       </list>
     </option>
   </component>
@@ -287,10 +313,10 @@
     <sorting>DEFINITION_ORDER</sorting>
   </component>
   <component name="ProjectFrameBounds" extendedState="7">
-    <option name="x" value="-9" />
-    <option name="y" value="-9" />
-    <option name="width" value="1938" />
-    <option name="height" value="1048" />
+    <option name="x" value="-10" />
+    <option name="y" value="-10" />
+    <option name="width" value="1939" />
+    <option name="height" value="1049" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true">
     <ConfirmationsSetting value="1" id="Add" />
@@ -300,7 +326,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -312,6 +337,7 @@
           <select />
         </subPane>
       </pane>
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -337,7 +363,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Python.ensemble_pca_lda">
+  <component name="RunManager" selected="Python.CW1_pca_low">
     <configuration name="CW1_alternative" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <module name="CW1" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -382,13 +408,29 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
+    <configuration name="CW1_pca" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <module name="CW1" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/CW1_pca.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="true" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
     <configuration name="CW1_pca_low" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <module name="CW1" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
       <option name="SDK_HOME" value="" />
       <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
       <option name="IS_MODULE_SDK" value="true" />
@@ -430,6 +472,9 @@
       <module name="CW1" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
       <option name="SDK_HOME" value="" />
       <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
       <option name="IS_MODULE_SDK" value="true" />
@@ -445,42 +490,20 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
-    <configuration name="multiple_lac_lda_runs" type="PythonConfigurationType" factoryName="Python" temporary="true">
-      <module name="CW1" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/multiple_lac_lda_runs.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="true" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <option name="MODULE_MODE" value="false" />
-      <option name="REDIRECT_INPUT" value="false" />
-      <option name="INPUT_FILE" value="" />
-      <method v="2" />
-    </configuration>
     <list>
-      <item itemvalue="Python.multiple_lac_lda_runs" />
       <item itemvalue="Python.CW1_pca_low" />
       <item itemvalue="Python.CW1_alternative" />
       <item itemvalue="Python.ensemble_pca_lda" />
       <item itemvalue="Python.CW1_main" />
+      <item itemvalue="Python.CW1_pca" />
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="Python.CW1_pca_low" />
+        <item itemvalue="Python.CW1_pca" />
         <item itemvalue="Python.ensemble_pca_lda" />
         <item itemvalue="Python.CW1_main" />
-        <item itemvalue="Python.CW1_pca_low" />
         <item itemvalue="Python.CW1_alternative" />
-        <item itemvalue="Python.multiple_lac_lda_runs" />
       </list>
     </recent_temporary>
   </component>
@@ -508,8 +531,9 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-7" y="-7" width="1550" height="838" extended-state="7" />
+    <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.49882904" visible="true" weight="0.103355706" />
+      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.49882904" visible="true" weight="0.10469799" />
       <window_info id="Structure" order="1" sideWeight="0.50117093" side_tool="true" weight="0.12818792" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
@@ -524,13 +548,13 @@
       <window_info anchor="bottom" id="Database Changes" order="9" show_stripe_button="false" />
       <window_info anchor="bottom" id="Event Log" order="10" sideWeight="0.50067115" side_tool="true" weight="0.2609929" />
       <window_info anchor="bottom" id="Terminal" order="11" weight="0.33049646" />
-      <window_info anchor="bottom" id="Python Console" order="12" sideWeight="0.49932885" visible="true" weight="0.2567376" />
+      <window_info active="true" anchor="bottom" id="Python Console" order="12" sideWeight="0.49932885" visible="true" weight="0.2567376" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
-      <window_info active="true" anchor="right" id="SciView" order="3" sideWeight="0.769084" visible="true" weight="0.6684564" />
+      <window_info anchor="right" id="SciView" order="3" sideWeight="0.76717556" visible="true" weight="0.16174497" />
       <window_info anchor="right" id="Database" order="4" sideWeight="0.4923664" weight="0.3295302" />
-      <window_info anchor="right" x="0" y="0" width="337" height="638" id="Documentation" order="5" sideWeight="0.23091602" side_tool="true" visible="true" weight="0.6684564" />
+      <window_info anchor="right" x="0" y="0" width="337" height="638" id="Documentation" order="5" sideWeight="0.23282443" side_tool="true" visible="true" weight="0.16174497" />
     </layout>
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -549,7 +573,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/CW1_main.py</url>
-          <line>211</line>
+          <line>203</line>
           <option name="timeStamp" value="114" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
@@ -653,13 +677,6 @@
     <entry file="file://$PROJECT_DIR$/CW1.py" />
     <entry file="file://$PROJECT_DIR$/testing.py" />
     <entry file="file://$PROJECT_DIR$/eigen_face.py" />
-    <entry file="file://$PROJECT_DIR$/multiple_pca_runs.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2108">
-          <caret line="127" column="17" selection-start-line="127" selection-start-column="17" selection-end-line="127" selection-end-column="17" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/multiple_lac_lda_runs.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="34">
@@ -671,13 +688,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="5168">
           <caret line="312" selection-start-line="312" selection-end-line="312" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/CW1_alternative.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1666">
-          <caret line="102" selection-start-line="102" selection-end-line="102" />
         </state>
       </provider>
     </entry>
@@ -698,43 +708,6 @@
       </provider>
     </entry>
     <entry file="file://$USER_HOME$/AppData/Local/Programs/Python/Python36/Lib/codecs.py" />
-    <entry file="file://$PROJECT_DIR$/image_data_processor.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2567">
-          <caret line="151" column="26" selection-start-line="151" selection-start-column="26" selection-end-line="151" selection-end-column="26" />
-          <folding>
-            <element signature="e#0#18#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/pca.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1462">
-          <caret line="86" column="40" selection-start-line="86" selection-start-column="17" selection-end-line="86" selection-end-column="40" />
-          <folding>
-            <element signature="e#0#18#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/CW1_main.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="85">
-          <caret line="5" column="10" selection-start-line="5" selection-end-line="6" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/CW1_pca_low.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1428">
-          <caret line="84" column="55" selection-start-line="84" selection-end-line="85" />
-          <folding>
-            <element signature="e#0#26#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$USER_HOME$/AppData/Local/JetBrains/Toolbox/apps/PyCharm-P/ch-0/182.4505.26.vmoptions">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="68">
@@ -744,7 +717,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/pca_lda.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="158">
+        <state relative-caret-position="1411">
           <caret line="84" selection-start-line="84" selection-end-line="84" />
           <folding>
             <element signature="e#0#17#0" expanded="true" />
@@ -752,10 +725,20 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/pca.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1428">
+          <caret line="86" column="40" selection-start-line="86" selection-start-column="17" selection-end-line="86" selection-end-column="40" />
+          <folding>
+            <element signature="e#0#18#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/fusion_rules.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="187">
-          <caret line="20" column="44" lean-forward="true" selection-start-line="20" selection-start-column="44" selection-end-line="20" selection-end-column="44" />
+        <state relative-caret-position="323">
+          <caret line="20" column="44" selection-start-line="20" selection-start-column="44" selection-end-line="20" selection-end-column="44" />
           <folding>
             <element signature="e#0#31#0" expanded="true" />
           </folding>
@@ -768,7 +751,63 @@
           <caret line="144" selection-start-line="144" selection-end-line="144" />
           <folding>
             <element signature="e#0#28#0" expanded="true" />
-            <marker date="1542543139633" expanded="true" signature="2122:5184" ph="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/image_data_processor.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1768">
+          <caret line="151" column="26" selection-start-line="151" selection-start-column="26" selection-end-line="151" selection-end-column="26" />
+          <folding>
+            <element signature="e#0#18#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/CW1_alternative.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-170">
+          <caret line="70" selection-start-line="70" selection-end-line="70" />
+          <folding>
+            <element signature="e#0#26#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/CW1_main.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="357">
+          <caret line="75" column="77" selection-start-line="55" selection-end-line="75" selection-end-column="77" />
+          <folding>
+            <element signature="e#0#26#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/CW1_pca_low.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1020">
+          <caret line="66" column="35" selection-start-line="66" selection-start-column="35" selection-end-line="66" selection-end-column="35" />
+          <folding>
+            <element signature="e#0#26#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/multiple_pca_runs.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-221">
+          <caret line="9" column="12" selection-start-line="9" selection-start-column="12" selection-end-line="9" selection-end-column="12" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/CW1_pca.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="102">
+          <caret line="24" column="27" lean-forward="true" selection-start-line="24" selection-start-column="27" selection-end-line="24" selection-end-column="27" />
+          <folding>
+            <element signature="e#0#26#0" expanded="true" />
           </folding>
         </state>
       </provider>

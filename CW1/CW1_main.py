@@ -32,14 +32,6 @@ def nearest_neighbour(pca):
     return learning_result
 
 
-'''def confusion_matrix(num_of_distinct_faces, learning_results, test_results):
-    confusion_mat = np.zeros((num_of_distinct_face, num_of_distinct_face))
-    for i in range(0, len(learning_results)):
-        confusion_mat[int(learning_results[i] - 1), int(test_results[i] - 1)] += 1
-
-    return confusion_mat'''
-
-
 # Loading face information in .mat data file
 data = loadmat('face.mat')
 
