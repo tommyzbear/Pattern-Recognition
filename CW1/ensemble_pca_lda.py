@@ -74,10 +74,13 @@ def ensemble_random_feature(num_of_train_samples,
         # test_sample_projection_array_feature[i, :, :] = pca_lda_method.test_sample_projection
 
         # 10,104,51
-        results_array_random_feature[i, :] = nearest_neighbour(pca_lda_method.num_of_test_samples,
-                                                           pca_lda_method.test_sample_projection,
-                                                               pca_lda_method.train_sample_projection,
-                                                               pca_lda_method.train_results)
+        results_temp = nearest_neighbour(pca_lda_method.num_of_test_samples,
+                                         pca_lda_method.test_sample_projection,
+                                         pca_lda_method.train_sample_projection,
+                                         pca_lda_method.train_results)
+        results_array_random_feature[i, :] = results_temp
+
+        print('Random feature #%i Accuracy:' % (i + 1), '{:.2%}'.format(compute_accuracy(results_temp, test_results)))
 
         probability_array_random_feature[i, :] = probability_given_classifier(pca_lda_method)
 
@@ -124,10 +127,14 @@ def ensemble_random_data(num_of_train_samples,
         # test_sample_projection_array_data[i, :, :] = lda_method.test_sample_projection
 
         # 10,104,51
-        results_array_random_data[i, :] = nearest_neighbour(lda_method.num_of_test_samples,
-                                                            lda_method.test_sample_projection,
-                                                            lda_method.train_sample_projection,
-                                                            lda_method.train_results)
+        results_temp = nearest_neighbour(lda_method.num_of_test_samples,
+                                         lda_method.test_sample_projection,
+                                         lda_method.train_sample_projection,
+                                         lda_method.train_results)
+
+        results_array_random_data[i, :] = results_temp
+
+        print('Bag #%i Accuracy:' % (i + 1), '{:.2%}'.format(compute_accuracy(results_temp, test_results)))
 
         probability_array_random_data[i, :] = probability_given_classifier(lda_method)
 
@@ -211,149 +218,35 @@ num_of_train_samples, num_of_test_samples, train_samples, test_samples, train_re
 # Randomization in feature space only, varying randomness parameter M
 print('-----Ensemble learning using randomization in feature space-----')
 # Randomization in feature space
-results_array_random_feature, probability_array_random_feature = ensemble_random_feature(num_of_train_samples,
-                                                                                         num_of_test_samples,
-                                                                                         num_of_distinct_face,
-                                                                                         T=10,
-                                                                                         M0=100,
-                                                                                         M_lda=25)
+M0_list = [24, 30, 40, 50, 100]
+for M0 in M0_list:
+    results_array_random_feature, probability_array_random_feature = ensemble_random_feature(num_of_train_samples,
+                                                                                             num_of_test_samples,
+                                                                                             num_of_distinct_face,
+                                                                                             T=10,
+                                                                                             M0=M0,
+                                                                                             M_lda=25)
 
-# Majority voting
-majority_result = majority_voting(results_array_random_feature)
-print("Majority voting Accuracy: ", "{:.2%}".format(compute_accuracy(majority_result, test_results)))
-
-# Sum rule
-sum_rule_result = sum_rule(probability_array_random_feature)
-print("Sum rule Accuracy: ", "{:.2%}".format(compute_accuracy(sum_rule_result, test_results)))
-
-# Prod rule
-prod_rule_result = prod_rule(probability_array_random_feature)
-print("Prod rule Accuracy: ", "{:.2%}".format(compute_accuracy(prod_rule_result, test_results)))
-
-# Max rule
-max_rule_result = max_rule(probability_array_random_feature)
-print("Max rule Accuracy: ", "{:.2%}".format(compute_accuracy(prod_rule_result, test_results)))
-
-results_array_random_feature, probability_array_random_feature = ensemble_random_feature(num_of_train_samples,
-                                                                                         num_of_test_samples,
-                                                                                         num_of_distinct_face,
-                                                                                         T=10,
-                                                                                         M0=50,
-                                                                                         M_lda=25)
-
-# Majority voting
-majority_result = majority_voting(results_array_random_feature)
-print("Majority voting Accuracy: ", "{:.2%}".format(compute_accuracy(majority_result, test_results)))
-
-# Sum rule
-sum_rule_result = sum_rule(probability_array_random_feature)
-print("Sum rule Accuracy: ", "{:.2%}".format(compute_accuracy(sum_rule_result, test_results)))
-
-# Prod rule
-prod_rule_result = prod_rule(probability_array_random_feature)
-print("Prod rule Accuracy: ", "{:.2%}".format(compute_accuracy(prod_rule_result, test_results)))
-
-# Max rule
-max_rule_result = max_rule(probability_array_random_feature)
-print("Max rule Accuracy: ", "{:.2%}".format(compute_accuracy(prod_rule_result, test_results)))
-
-results_array_random_feature, probability_array_random_feature = ensemble_random_feature(num_of_train_samples,
-                                                                                         num_of_test_samples,
-                                                                                         num_of_distinct_face,
-                                                                                         T=10,
-                                                                                         M0=24,
-                                                                                         M_lda=25)
-
-# Majority voting
-majority_result = majority_voting(results_array_random_feature)
-print("Majority voting Accuracy: ", "{:.2%}".format(compute_accuracy(majority_result, test_results)))
-
-# Sum rule
-sum_rule_result = sum_rule(probability_array_random_feature)
-print("Sum rule Accuracy: ", "{:.2%}".format(compute_accuracy(sum_rule_result, test_results)))
-
-# Prod rule
-prod_rule_result = prod_rule(probability_array_random_feature)
-print("Prod rule Accuracy: ", "{:.2%}".format(compute_accuracy(prod_rule_result, test_results)))
-
-# Max rule
-max_rule_result = max_rule(probability_array_random_feature)
-print("Max rule Accuracy: ", "{:.2%}".format(compute_accuracy(prod_rule_result, test_results)))
+    # Majority voting
+    majority_result = majority_voting(results_array_random_feature)
+    print("Majority voting Accuracy: ", "{:.2%}".format(compute_accuracy(majority_result, test_results)))
 
 # Randomization in data samples only, varying base model T
 print('\n-----Ensemble learning by randomizing data samples-----')
 # Randomization in sample data
-results_array_random_data, probability_array_random_data = ensemble_random_data(num_of_train_samples,
-                                                                                num_of_test_samples,
-                                                                                num_of_distinct_face,
-                                                                                train_samples,
-                                                                                train_results,
-                                                                                T=5,
-                                                                                M_lda=25)
+T_list = [5, 10, 15, 20, 30]
+for T in T_list:
+    results_array_random_data, probability_array_random_data = ensemble_random_data(num_of_train_samples,
+                                                                                    num_of_test_samples,
+                                                                                    num_of_distinct_face,
+                                                                                    train_samples,
+                                                                                    train_results,
+                                                                                    T=T,
+                                                                                    M_lda=25)
 
-# Majority voting
-majority_result = majority_voting(results_array_random_data)
-print("Majority voting Accuracy: ", "{:.2%}".format(compute_accuracy(majority_result, test_results)))
-
-# Sum rule
-sum_rule_result = sum_rule(probability_array_random_data)
-print("Sum rule Accuracy: ", "{:.2%}".format(compute_accuracy(sum_rule_result, test_results)))
-
-# Prod rule
-prod_rule_result = prod_rule(probability_array_random_data)
-print("Prod rule Accuracy: ", "{:.2%}".format(compute_accuracy(prod_rule_result, test_results)))
-
-# Max rule
-max_rule_result = max_rule(probability_array_random_data)
-print("Max rule Accuracy: ", "{:.2%}".format(compute_accuracy(prod_rule_result, test_results)))
-
-results_array_random_data, probability_array_random_data = ensemble_random_data(num_of_train_samples,
-                                                                                num_of_test_samples,
-                                                                                num_of_distinct_face,
-                                                                                train_samples,
-                                                                                train_results,
-                                                                                T=10,
-                                                                                M_lda=25)
-
-# Majority voting
-majority_result = majority_voting(results_array_random_data)
-print("Majority voting Accuracy: ", "{:.2%}".format(compute_accuracy(majority_result, test_results)))
-
-# Sum rule
-sum_rule_result = sum_rule(probability_array_random_data)
-print("Sum rule Accuracy: ", "{:.2%}".format(compute_accuracy(sum_rule_result, test_results)))
-
-# Prod rule
-prod_rule_result = prod_rule(probability_array_random_data)
-print("Prod rule Accuracy: ", "{:.2%}".format(compute_accuracy(prod_rule_result, test_results)))
-
-# Max rule
-max_rule_result = max_rule(probability_array_random_data)
-print("Max rule Accuracy: ", "{:.2%}".format(compute_accuracy(prod_rule_result, test_results)))
-
-results_array_random_data, probability_array_random_data = ensemble_random_data(num_of_train_samples,
-                                                                                num_of_test_samples,
-                                                                                num_of_distinct_face,
-                                                                                train_samples,
-                                                                                train_results,
-                                                                                T=20,
-                                                                                M_lda=25)
-
-# Majority voting
-majority_result = majority_voting(results_array_random_data)
-print("Majority voting Accuracy: ", "{:.2%}".format(compute_accuracy(majority_result, test_results)))
-
-# Sum rule
-sum_rule_result = sum_rule(probability_array_random_data)
-print("Sum rule Accuracy: ", "{:.2%}".format(compute_accuracy(sum_rule_result, test_results)))
-
-# Prod rule
-prod_rule_result = prod_rule(probability_array_random_data)
-print("Prod rule Accuracy: ", "{:.2%}".format(compute_accuracy(prod_rule_result, test_results)))
-
-# Max rule
-max_rule_result = max_rule(probability_array_random_data)
-print("Max rule Accuracy: ", "{:.2%}".format(compute_accuracy(prod_rule_result, test_results)))
+    # Majority voting
+    majority_result = majority_voting(results_array_random_data)
+    print("Majority voting Accuracy: ", "{:.2%}".format(compute_accuracy(majority_result, test_results)))
 
 # Randomization in both feature space and data samples in parallel
 print('\n-----Ensemble learning by randomizing both feature space and data samples in parallel-----')
@@ -361,7 +254,7 @@ results_array_random_feature, probability_array_random_feature = ensemble_random
                                                                                          num_of_test_samples,
                                                                                          num_of_distinct_face,
                                                                                          T=10,
-                                                                                         M0=50,
+                                                                                         M0=40,
                                                                                          M_lda=25)
 
 results_array_random_data, probability_array_random_data = ensemble_random_data(num_of_train_samples,
@@ -411,32 +304,32 @@ idp.plot_confusion_matrix(cnf_matrix, classes=list(range(0, 53)),
 plt.show()
 
 # Randomization in both feature space and data samples in sequence
-# print('\n-----Ensemble learning by randomizing both data samples and feature space in sequence-----')
-# results_array_randomisation_sequence, probability_array_randomisation_sequence = \
-#     ensemble_random_data_and_feature_in_sequence(num_of_train_samples,
-#                                                  num_of_test_samples,
-#                                                  num_of_distinct_face,
-#                                                  train_samples,
-#                                                  train_results,
-#                                                  T=10,
-#                                                  M0=50,
-#                                                  M_lda=25)
-#
-# # Majority voting
-# majority_result = majority_voting(results_array_randomisation_sequence)
-# print("Majority voting Accuracy: ", "{:.2%}".format(compute_accuracy(majority_result, test_results)))
-#
-# # Sum rule
-# sum_rule_result = sum_rule(probability_array_randomisation_sequence)
-# print("Sum rule Accuracy: ", "{:.2%}".format(compute_accuracy(sum_rule_result, test_results)))
-#
-# # Prod rule
-# prod_rule_result = prod_rule(probability_array_randomisation_sequence)
-# print("Prod rule Accuracy: ", "{:.2%}".format(compute_accuracy(prod_rule_result, test_results)))
-#
-# # Max rule
-# max_rule_result = max_rule(probability_array_randomisation_sequence)
-# print("Max rule Accuracy: ", "{:.2%}".format(compute_accuracy(prod_rule_result, test_results)))
+print('\n-----Ensemble learning by randomizing both data samples and feature space in sequence-----')
+results_array_randomisation_sequence, probability_array_randomisation_sequence = \
+    ensemble_random_data_and_feature_in_sequence(num_of_train_samples,
+                                                 num_of_test_samples,
+                                                 num_of_distinct_face,
+                                                 train_samples,
+                                                 train_results,
+                                                 T=10,
+                                                 M0=50,
+                                                 M_lda=25)
+
+# Majority voting
+majority_result = majority_voting(results_array_randomisation_sequence)
+print("Majority voting Accuracy: ", "{:.2%}".format(compute_accuracy(majority_result, test_results)))
+
+# Sum rule
+sum_rule_result = sum_rule(probability_array_randomisation_sequence)
+print("Sum rule Accuracy: ", "{:.2%}".format(compute_accuracy(sum_rule_result, test_results)))
+
+# Prod rule
+prod_rule_result = prod_rule(probability_array_randomisation_sequence)
+print("Prod rule Accuracy: ", "{:.2%}".format(compute_accuracy(prod_rule_result, test_results)))
+
+# Max rule
+max_rule_result = max_rule(probability_array_randomisation_sequence)
+print("Max rule Accuracy: ", "{:.2%}".format(compute_accuracy(prod_rule_result, test_results)))
 
 # # committee machine
 # test_sample_projection_array_concat = np.concatenate((test_sample_projection_array_feature,
