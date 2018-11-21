@@ -1,0 +1,2 @@
+# Pattern-Recognition
+The aim of this project is to demonstrate and investigate several approaches in solving face recognition tasks. By using PCA for dimensionality reduction and LDA to linearly seperate the classes. Both methods have been discussed seperately and a hybrid PCA-LDA technique is also present. Extensive research has also been conducted on generalising the problem using ensemble learning techniques.
